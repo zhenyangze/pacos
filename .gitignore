@@ -13,3 +13,6 @@ configure
 libtool
 modules/pacos.so
 run-tests.php
+.libs
+*.lo
+pacos.la
