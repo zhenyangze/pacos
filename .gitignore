@@ -1,0 +1,15 @@
+config.log
+build/
+Makefile
+Makefile.objects
+acinclude.m4
+aclocal.m4
+autom4te.cache/output.0
+autom4te.cache/requests
+autom4te.cache/traces.0
+config.nice
+config.status
+configure
+libtool
+modules/pacos.so
+run-tests.php
