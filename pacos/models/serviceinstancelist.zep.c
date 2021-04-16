@@ -130,7 +130,7 @@ PHP_METHOD(Pacos_Models_ServiceInstanceList, __construct) {
 				ZVAL_COPY(&host, _1$$4);
 				ZEPHIR_INIT_NVAR(&_3$$5);
 				object_init_ex(&_3$$5, pacos_models_serviceinstance_ce);
-				ZEPHIR_CALL_METHOD(NULL, &_3$$5, "__construct", &_4, 15, &host);
+				ZEPHIR_CALL_METHOD(NULL, &_3$$5, "__construct", &_4, 10, &host);
 				zephir_check_call_status();
 				zephir_update_property_array_append(this_ptr, SL("hosts"), &_3$$5);
 			} ZEND_HASH_FOREACH_END();
@@ -147,7 +147,7 @@ PHP_METHOD(Pacos_Models_ServiceInstanceList, __construct) {
 				zephir_check_call_status();
 					ZEPHIR_INIT_NVAR(&_5$$6);
 					object_init_ex(&_5$$6, pacos_models_serviceinstance_ce);
-					ZEPHIR_CALL_METHOD(NULL, &_5$$6, "__construct", &_4, 15, &host);
+					ZEPHIR_CALL_METHOD(NULL, &_5$$6, "__construct", &_4, 10, &host);
 					zephir_check_call_status();
 					zephir_update_property_array_append(this_ptr, SL("hosts"), &_5$$6);
 				ZEPHIR_CALL_METHOD(NULL, &_0$$4, "next", NULL, 0);

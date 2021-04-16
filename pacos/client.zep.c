@@ -92,6 +92,9 @@ ZEPHIR_INIT_CLASS(Pacos_Client) {
 
 	zend_declare_property_long(pacos_client_ce, SL("display_error"), 1, ZEND_ACC_PROTECTED);
 
+	zend_declare_property_null(pacos_client_ce, SL("options"), ZEND_ACC_PROTECTED);
+
+	pacos_client_ce->create_object = zephir_init_properties_Pacos_Client;
 	zephir_declare_class_constant_long(pacos_client_ce, SL("DEFAULT_PORT"), 8848);
 
 	zephir_declare_class_constant_long(pacos_client_ce, SL("DEFAULT_TIMEOUT"), 3);
@@ -171,7 +174,7 @@ PHP_METHOD(Pacos_Client, __construct) {
 	zephir_update_property_zval(this_ptr, ZEND_STRL("port"), &_0);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "getvar", NULL, 0);
 	zephir_check_call_status();
-	zephir_is_iterable(&options, 0, "pacos/Client.zep", 110);
+	zephir_is_iterable(&options, 0, "pacos/Client.zep", 112);
 	if (Z_TYPE_P(&options) == IS_ARRAY) {
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&options), _3, _4, _1)
 		{
@@ -251,7 +254,7 @@ PHP_METHOD(Pacos_Client, getVar) {
 	add_assoc_stringl_ex(&configList, SL("auto_close"), SL("pacos_auto_close"));
 	add_assoc_stringl_ex(&configList, SL("timeout"), SL("pacos_http_timeout"));
 	add_assoc_stringl_ex(&configList, SL("display_error"), SL("pacos_display_error"));
-	zephir_is_iterable(&configList, 0, "pacos/Client.zep", 144);
+	zephir_is_iterable(&configList, 0, "pacos/Client.zep", 146);
 	if (Z_TYPE_P(&configList) == IS_ARRAY) {
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&configList), _2, _3, _0)
 		{
@@ -434,18 +437,18 @@ PHP_METHOD(Pacos_Client, request) {
 	ZVAL_NULL(&timeout);
 	if (zephir_array_isset_string(&options, SL("timeout"))) {
 		ZEPHIR_OBS_NVAR(&timeout);
-		zephir_array_fetch_string(&timeout, &options, SL("timeout"), PH_NOISY, "pacos/Client.zep", 191);
+		zephir_array_fetch_string(&timeout, &options, SL("timeout"), PH_NOISY, "pacos/Client.zep", 193);
 	}
 	if (zephir_array_isset_string(&options, SL("headers"))) {
 		ZEPHIR_OBS_NVAR(&header);
-		zephir_array_fetch_string(&header, &options, SL("headers"), PH_NOISY, "pacos/Client.zep", 195);
+		zephir_array_fetch_string(&header, &options, SL("headers"), PH_NOISY, "pacos/Client.zep", 197);
 	}
 	if (zephir_array_isset_string(&options, SL("form_params"))) {
 		ZEPHIR_OBS_NVAR(&data);
-		zephir_array_fetch_string(&data, &options, SL("form_params"), PH_NOISY, "pacos/Client.zep", 199);
+		zephir_array_fetch_string(&data, &options, SL("form_params"), PH_NOISY, "pacos/Client.zep", 201);
 	}
 	if (zephir_array_isset_string(&options, SL("query"))) {
-		zephir_array_fetch_string(&_6$$9, &options, SL("query"), PH_NOISY | PH_READONLY, "pacos/Client.zep", 203);
+		zephir_array_fetch_string(&_6$$9, &options, SL("query"), PH_NOISY | PH_READONLY, "pacos/Client.zep", 205);
 		ZEPHIR_CALL_FUNCTION(&_7$$9, "http_build_query", NULL, 5, &_6$$9);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&_8$$9);
@@ -498,7 +501,7 @@ PHP_METHOD(Pacos_Client, assertResponse) {
 	object_init_ex(&_2, zend_exception_get_default(TSRMLS_C));
 	ZEPHIR_CALL_METHOD(NULL, &_2, "__construct", NULL, 6, message);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_2, "pacos/Client.zep", 224);
+	zephir_throw_exception_debug(&_2, "pacos/Client.zep", 226);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -543,68 +546,27 @@ PHP_METHOD(Pacos_Client, limit) {
 
 }
 
-/**
- * log
- *
- * @param info
- *
- * @return
- */
-PHP_METHOD(Pacos_Client, log) {
+zend_object *zephir_init_properties_Pacos_Client(zend_class_entry *class_type TSRMLS_DC) {
 
-	zval _3;
+		zval _0, _1$$3;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *category_param = NULL, *info_param = NULL, _0, outInfo, _1, _2, _4, _5;
-	zval category, info;
-	zval *this_ptr = getThis();
+		ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1$$3);
 
-	ZVAL_UNDEF(&category);
-	ZVAL_UNDEF(&info);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&outInfo);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_4);
-	ZVAL_UNDEF(&_5);
-	ZVAL_UNDEF(&_3);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &category_param, &info_param);
-
-	zephir_get_strval(&category, category_param);
-	if (!info_param) {
-		ZEPHIR_INIT_VAR(&info);
-		ZVAL_STRING(&info, "");
-	} else {
-		zephir_get_strval(&info, info_param);
+		ZEPHIR_MM_GROW();
+	
+	{
+		zval local_this_ptr, *this_ptr = &local_this_ptr;
+		ZEPHIR_CREATE_OBJECT(this_ptr, class_type);
+		zephir_read_property_ex(&_0, this_ptr, ZEND_STRL("options"), PH_NOISY_CC | PH_READONLY);
+		if (Z_TYPE_P(&_0) == IS_NULL) {
+			ZEPHIR_INIT_VAR(&_1$$3);
+			array_init(&_1$$3);
+			zephir_update_property_zval_ex(this_ptr, ZEND_STRL("options"), &_1$$3);
+		}
+		ZEPHIR_MM_RESTORE();
+		return Z_OBJ_P(this_ptr);
 	}
-
-
-	zephir_read_property(&_0, this_ptr, ZEND_STRL("debug"), PH_NOISY_CC | PH_READONLY);
-	if (!ZEPHIR_IS_TRUE(&_0)) {
-		RETURN_MM_NULL();
-	}
-	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "[Y-m-d H:i:s]");
-	ZEPHIR_CALL_FUNCTION(&_2, "date", NULL, 7, &_1);
-	zephir_check_call_status();
-	ZEPHIR_INIT_NVAR(&_1);
-	ZEPHIR_INIT_VAR(&_3);
-	zephir_create_array(&_3, 2, 0);
-	zephir_array_fast_append(&_3, &category);
-	zephir_array_fast_append(&_3, &info);
-	zephir_fast_join_str(&_1, SL(":"), &_3);
-	ZEPHIR_INIT_VAR(&_4);
-	ZVAL_STRING(&_4, "[%s]%s\n");
-	ZEPHIR_CALL_FUNCTION(&outInfo, "sprintf", NULL, 4, &_4, &_2, &_1);
-	zephir_check_call_status();
-	ZEPHIR_INIT_NVAR(&_4);
-	ZVAL_STRING(&_4, "/tmp/pacos.log");
-	ZVAL_LONG(&_5, 8);
-	ZEPHIR_CALL_FUNCTION(NULL, "file_put_contents", NULL, 8, &_4, &outInfo, &_5);
-	zephir_check_call_status();
-	ZEPHIR_MM_RESTORE();
 
 }
 

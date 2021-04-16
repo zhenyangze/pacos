@@ -10,7 +10,7 @@ PHP_METHOD(Pacos_Client, setTimeout);
 PHP_METHOD(Pacos_Client, request);
 PHP_METHOD(Pacos_Client, assertResponse);
 PHP_METHOD(Pacos_Client, limit);
-PHP_METHOD(Pacos_Client, log);
+zend_object *zephir_init_properties_Pacos_Client(zend_class_entry *class_type TSRMLS_DC);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_pacos_client___construct, 0, 0, 0)
 #if PHP_VERSION_ID >= 70200
@@ -70,19 +70,6 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_pacos_client_limit, 0, 0, 0)
 #endif
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_pacos_client_log, 0, 0, 1)
-#if PHP_VERSION_ID >= 70200
-	ZEND_ARG_TYPE_INFO(0, category, IS_STRING, 0)
-#else
-	ZEND_ARG_INFO(0, category)
-#endif
-#if PHP_VERSION_ID >= 70200
-	ZEND_ARG_TYPE_INFO(0, info, IS_STRING, 0)
-#else
-	ZEND_ARG_INFO(0, info)
-#endif
-ZEND_END_ARG_INFO()
-
 ZEPHIR_INIT_FUNCS(pacos_client_method_entry) {
 	PHP_ME(Pacos_Client, __construct, arginfo_pacos_client___construct, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
 	PHP_ME(Pacos_Client, getVar, NULL, ZEND_ACC_PROTECTED)
@@ -91,6 +78,5 @@ ZEPHIR_INIT_FUNCS(pacos_client_method_entry) {
 	PHP_ME(Pacos_Client, request, arginfo_pacos_client_request, ZEND_ACC_PROTECTED)
 	PHP_ME(Pacos_Client, assertResponse, arginfo_pacos_client_assertresponse, ZEND_ACC_PROTECTED)
 	PHP_ME(Pacos_Client, limit, arginfo_pacos_client_limit, ZEND_ACC_PROTECTED)
-	PHP_ME(Pacos_Client, log, arginfo_pacos_client_log, ZEND_ACC_PROTECTED)
 	PHP_FE_END
 };

@@ -353,7 +353,7 @@ PHP_METHOD(Pacos_Config, get) {
 		ZEPHIR_CALL_FUNCTION(&_46$$24, "sprintf", NULL, 4, &_45$$24, &dataId, &group, &_44$$24);
 		zephir_check_call_status();
 		ZVAL_LONG(&_47$$24, 404);
-		ZEPHIR_CALL_METHOD(NULL, &_43$$24, "__construct", NULL, 12, &_46$$24, &_47$$24);
+		ZEPHIR_CALL_METHOD(NULL, &_43$$24, "__construct", NULL, 7, &_46$$24, &_47$$24);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_43$$24, "pacos/Config.zep", 73);
 		ZEPHIR_MM_RESTORE();
@@ -540,7 +540,7 @@ PHP_METHOD(Pacos_Config, search) {
 		ZEPHIR_CALL_FUNCTION(&_11$$4, "sprintf", NULL, 4, &_10$$4, &dataId, &group, &_9$$4);
 		zephir_check_call_status();
 		ZVAL_LONG(&_12$$4, 404);
-		ZEPHIR_CALL_METHOD(NULL, &_8$$4, "__construct", NULL, 12, &_11$$4, &_12$$4);
+		ZEPHIR_CALL_METHOD(NULL, &_8$$4, "__construct", NULL, 7, &_11$$4, &_12$$4);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_8$$4, "pacos/Config.zep", 145);
 		ZEPHIR_MM_RESTORE();
@@ -791,7 +791,7 @@ PHP_METHOD(Pacos_Config, listen) {
 			if (Z_TYPE_P(&tmpCache) == IS_ARRAY) {
 				ZEPHIR_INIT_NVAR(&cacheObj);
 				object_init_ex(&cacheObj, pacos_models_configinfo_ce);
-				ZEPHIR_CALL_METHOD(NULL, &cacheObj, "__construct", &_2, 13, &tmpCache);
+				ZEPHIR_CALL_METHOD(NULL, &cacheObj, "__construct", &_2, 8, &tmpCache);
 				zephir_check_call_status();
 			} else {
 				ZEPHIR_CPY_WRT(&cacheObj, &tmpCache);
@@ -833,7 +833,7 @@ PHP_METHOD(Pacos_Config, listen) {
 				if (Z_TYPE_P(&tmpCache) == IS_ARRAY) {
 					ZEPHIR_INIT_NVAR(&cacheObj);
 					object_init_ex(&cacheObj, pacos_models_configinfo_ce);
-					ZEPHIR_CALL_METHOD(NULL, &cacheObj, "__construct", &_2, 13, &tmpCache);
+					ZEPHIR_CALL_METHOD(NULL, &cacheObj, "__construct", &_2, 8, &tmpCache);
 					zephir_check_call_status();
 				} else {
 					ZEPHIR_CPY_WRT(&cacheObj, &tmpCache);
@@ -913,7 +913,7 @@ PHP_METHOD(Pacos_Config, listen) {
 	ZVAL_STRING(&line, "");
 	ZEPHIR_INIT_VAR(&parts);
 	array_init(&parts);
-	ZEPHIR_CALL_FUNCTION(&_24, "urldecode", NULL, 14, &respString);
+	ZEPHIR_CALL_FUNCTION(&_24, "urldecode", NULL, 9, &respString);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_22);
 	ZVAL_STRING(&_22, "\x01");
@@ -931,7 +931,7 @@ PHP_METHOD(Pacos_Config, listen) {
 			zephir_fast_explode(&parts, &_27$$12, &line, LONG_MAX);
 			ZEPHIR_INIT_NVAR(&c);
 			object_init_ex(&c, pacos_models_configinfo_ce);
-			ZEPHIR_CALL_METHOD(NULL, &c, "__construct", &_2, 13);
+			ZEPHIR_CALL_METHOD(NULL, &c, "__construct", &_2, 8);
 			zephir_check_call_status();
 			if (zephir_fast_count_int(&parts) == 3) {
 				zephir_array_fetch_long(&_28$$13, &parts, 0, PH_NOISY | PH_READONLY, "pacos/Config.zep", 252);
@@ -967,7 +967,7 @@ PHP_METHOD(Pacos_Config, listen) {
 				zephir_fast_explode(&parts, &_33$$16, &line, LONG_MAX);
 				ZEPHIR_INIT_NVAR(&c);
 				object_init_ex(&c, pacos_models_configinfo_ce);
-				ZEPHIR_CALL_METHOD(NULL, &c, "__construct", &_2, 13);
+				ZEPHIR_CALL_METHOD(NULL, &c, "__construct", &_2, 8);
 				zephir_check_call_status();
 				if (zephir_fast_count_int(&parts) == 3) {
 					zephir_array_fetch_long(&_34$$17, &parts, 0, PH_NOISY | PH_READONLY, "pacos/Config.zep", 252);
@@ -996,21 +996,29 @@ PHP_METHOD(Pacos_Config, listen) {
 
 zend_object *zephir_init_properties_Pacos_Config(zend_class_entry *class_type TSRMLS_DC) {
 
-		zval _0, _1$$3;
+		zval _0, _2, _1$$3, _3$$4;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 		ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_1$$3);
+	ZVAL_UNDEF(&_3$$4);
 
 		ZEPHIR_MM_GROW();
 	
 	{
 		zval local_this_ptr, *this_ptr = &local_this_ptr;
 		ZEPHIR_CREATE_OBJECT(this_ptr, class_type);
-		zephir_read_property_ex(&_0, this_ptr, ZEND_STRL("tmpList"), PH_NOISY_CC | PH_READONLY);
+		zephir_read_property_ex(&_0, this_ptr, ZEND_STRL("options"), PH_NOISY_CC | PH_READONLY);
 		if (Z_TYPE_P(&_0) == IS_NULL) {
 			ZEPHIR_INIT_VAR(&_1$$3);
 			array_init(&_1$$3);
-			zephir_update_property_zval_ex(this_ptr, ZEND_STRL("tmpList"), &_1$$3);
+			zephir_update_property_zval_ex(this_ptr, ZEND_STRL("options"), &_1$$3);
+		}
+		zephir_read_property_ex(&_2, this_ptr, ZEND_STRL("tmpList"), PH_NOISY_CC | PH_READONLY);
+		if (Z_TYPE_P(&_2) == IS_NULL) {
+			ZEPHIR_INIT_VAR(&_3$$4);
+			array_init(&_3$$4);
+			zephir_update_property_zval_ex(this_ptr, ZEND_STRL("tmpList"), &_3$$4);
 		}
 		ZEPHIR_MM_RESTORE();
 		return Z_OBJ_P(this_ptr);

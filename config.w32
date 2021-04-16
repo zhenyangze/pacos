@@ -11,9 +11,9 @@ if (PHP_PACOS != "no") {
   }
   
   ADD_SOURCES(configure_module_dirname + "/pacos/exceptions", "pacosexception.zep.c pacosnamingnotfound.zep.c pacosrequestexception.zep.c pacosconfignotfound.zep.c pacosnamingnoaliveinstance.zep.c", "pacos");
-	ADD_SOURCES(configure_module_dirname + "/pacos", "client.zep.c clients.zep.c config.zep.c instance.zep.c 0__closure.zep.c 1__closure.zep.c", "pacos");
+	ADD_SOURCES(configure_module_dirname + "/pacos", "client.zep.c config.zep.c instance.zep.c 0__closure.zep.c 1__closure.zep.c", "pacos");
 	ADD_SOURCES(configure_module_dirname + "/pacos/models", "beatinfo.zep.c beatresult.zep.c configinfo.zep.c serviceinstance.zep.c serviceinstancelist.zep.c", "pacos");
-	ADD_SOURCES(configure_module_dirname + "/pacos/utils", "http.zep.c parser.zep.c response.zep.c selector.zep.c", "pacos");
+	ADD_SOURCES(configure_module_dirname + "/pacos/utils", "http.zep.c logs.zep.c parser.zep.c response.zep.c selector.zep.c", "pacos");
   ADD_FLAG("CFLAGS_PACOS", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
   ADD_FLAG("CFLAGS", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
   ADD_FLAG("LDFLAGS", "/LTCG");

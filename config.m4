@@ -13,7 +13,6 @@ if test "$PHP_PACOS" = "yes"; then
 	pacos/client.zep.c
 	pacos/exceptions/pacosnamingnotfound.zep.c
 	pacos/exceptions/pacosrequestexception.zep.c
-	pacos/clients.zep.c
 	pacos/config.zep.c
 	pacos/exceptions/pacosconfignotfound.zep.c
 	pacos/exceptions/pacosnamingnoaliveinstance.zep.c
@@ -24,6 +23,7 @@ if test "$PHP_PACOS" = "yes"; then
 	pacos/models/serviceinstance.zep.c
 	pacos/models/serviceinstancelist.zep.c
 	pacos/utils/http.zep.c
+	pacos/utils/logs.zep.c
 	pacos/utils/parser.zep.c
 	pacos/utils/response.zep.c
 	pacos/utils/selector.zep.c

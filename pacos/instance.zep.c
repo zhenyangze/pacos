@@ -20,8 +20,6 @@
 #include "kernel/string.h"
 #include "kernel/exception.h"
 #include "kernel/main.h"
-#include "kernel/concat.h"
-#include "kernel/file.h"
 
 
 /**
@@ -68,7 +66,7 @@ PHP_METHOD(Pacos_Instance, add) {
 	if (Z_TYPE_P(instance) == IS_ARRAY) {
 		ZEPHIR_INIT_VAR(&newInstance);
 		object_init_ex(&newInstance, pacos_models_serviceinstance_ce);
-		ZEPHIR_CALL_METHOD(NULL, &newInstance, "__construct", NULL, 15, instance);
+		ZEPHIR_CALL_METHOD(NULL, &newInstance, "__construct", NULL, 10, instance);
 		zephir_check_call_status();
 	} else {
 		ZEPHIR_CPY_WRT(&newInstance, instance);
@@ -83,11 +81,11 @@ PHP_METHOD(Pacos_Instance, add) {
 		zephir_read_property(&_3$$5, this_ptr, ZEND_STRL("_namespace"), PH_NOISY_CC | PH_READONLY);
 		zephir_update_property_zval(&newInstance, ZEND_STRL("namespaceId"), &_3$$5);
 	}
-	ZEPHIR_CALL_METHOD(NULL, &newInstance, "validate", NULL, 16);
+	ZEPHIR_CALL_METHOD(NULL, &newInstance, "validate", NULL, 11);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_4);
 	zephir_create_array(&_4, 1, 0);
-	ZEPHIR_CALL_METHOD(&_5, &newInstance, "tocreateparams", NULL, 17);
+	ZEPHIR_CALL_METHOD(&_5, &newInstance, "tocreateparams", NULL, 12);
 	zephir_check_call_status();
 	zephir_array_update_string(&_4, SL("form_params"), &_5, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_VAR(&_6);
@@ -183,11 +181,11 @@ PHP_METHOD(Pacos_Instance, delete) {
 	zephir_array_update_string(&_2, SL("port"), &_3, PH_COPY | PH_SEPARATE);
 	zephir_array_update_string(&_2, SL("clusterName"), &clusterName, PH_COPY | PH_SEPARATE);
 	zephir_array_update_string(&_2, SL("namespaceId"), &newNamespace, PH_COPY | PH_SEPARATE);
-	ZEPHIR_CALL_METHOD(NULL, &instance, "__construct", NULL, 15, &_2);
+	ZEPHIR_CALL_METHOD(NULL, &instance, "__construct", NULL, 10, &_2);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_4);
 	zephir_create_array(&_4, 1, 0);
-	ZEPHIR_CALL_METHOD(&_5, &instance, "todeleteparams", NULL, 18);
+	ZEPHIR_CALL_METHOD(&_5, &instance, "todeleteparams", NULL, 13);
 	zephir_check_call_status();
 	zephir_array_update_string(&_4, SL("query"), &_5, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_NVAR(&_3);
@@ -241,7 +239,7 @@ PHP_METHOD(Pacos_Instance, update) {
 	if (Z_TYPE_P(instance) == IS_ARRAY) {
 		ZEPHIR_INIT_VAR(&newInstance);
 		object_init_ex(&newInstance, pacos_models_serviceinstance_ce);
-		ZEPHIR_CALL_METHOD(NULL, &newInstance, "__construct", NULL, 15, instance);
+		ZEPHIR_CALL_METHOD(NULL, &newInstance, "__construct", NULL, 10, instance);
 		zephir_check_call_status();
 	} else {
 		ZEPHIR_CPY_WRT(&newInstance, instance);
@@ -256,11 +254,11 @@ PHP_METHOD(Pacos_Instance, update) {
 		zephir_read_property(&_3$$5, this_ptr, ZEND_STRL("_namespace"), PH_NOISY_CC | PH_READONLY);
 		zephir_update_property_zval(&newInstance, ZEND_STRL("namespaceId"), &_3$$5);
 	}
-	ZEPHIR_CALL_METHOD(NULL, &newInstance, "validate", NULL, 16);
+	ZEPHIR_CALL_METHOD(NULL, &newInstance, "validate", NULL, 11);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_4);
 	zephir_create_array(&_4, 1, 0);
-	ZEPHIR_CALL_METHOD(&_5, &newInstance, "toupdateparams", NULL, 19);
+	ZEPHIR_CALL_METHOD(&_5, &newInstance, "toupdateparams", NULL, 14);
 	zephir_check_call_status();
 	zephir_array_update_string(&_4, SL("form_params"), &_5, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_VAR(&_6);
@@ -357,7 +355,7 @@ PHP_METHOD(Pacos_Instance, list) {
 	zephir_array_update_string(&_2, SL("namespaceId"), &newNamespace, PH_COPY | PH_SEPARATE);
 	zephir_array_update_string(&_2, SL("clusters"), &clusterStr, PH_COPY | PH_SEPARATE);
 	add_assoc_stringl_ex(&_2, SL("healthyOnly"), SL("true"));
-	ZEPHIR_CALL_FUNCTION(&query, "array_filter", NULL, 20, &_2);
+	ZEPHIR_CALL_FUNCTION(&query, "array_filter", NULL, 15, &_2);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_3);
 	zephir_create_array(&_3, 2, 0);
@@ -400,14 +398,14 @@ PHP_METHOD(Pacos_Instance, list) {
 		ZEPHIR_INIT_VAR(&_10$$7);
 		ZVAL_STRING(&_10$$7, "service not found: serviceName");
 		ZVAL_LONG(&_11$$7, 404);
-		ZEPHIR_CALL_METHOD(NULL, &_9$$7, "__construct", NULL, 12, &_10$$7, &_11$$7);
+		ZEPHIR_CALL_METHOD(NULL, &_9$$7, "__construct", NULL, 7, &_10$$7, &_11$$7);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_9$$7, "pacos/Instance.zep", 148);
+		zephir_throw_exception_debug(&_9$$7, "pacos/Instance.zep", 149);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
 	object_init_ex(return_value, pacos_models_serviceinstancelist_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 21, &data);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 16, &data);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -505,9 +503,9 @@ PHP_METHOD(Pacos_Instance, get) {
 	ZEPHIR_INIT_NVAR(&_3);
 	ZVAL_BOOL(&_3, healthyOnly);
 	zephir_array_update_string(&_2, SL("healthyOnly"), &_3, PH_COPY | PH_SEPARATE);
-	ZEPHIR_CALL_METHOD(NULL, &instance, "__construct", &_4, 15, &_2);
+	ZEPHIR_CALL_METHOD(NULL, &instance, "__construct", &_4, 10, &_2);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&query, &instance, "togetparams", NULL, 22);
+	ZEPHIR_CALL_METHOD(&query, &instance, "togetparams", NULL, 17);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_5);
 	zephir_create_array(&_5, 1, 0);
@@ -543,10 +541,10 @@ PHP_METHOD(Pacos_Instance, get) {
 			array_init(&data);
 		}
 	}
-	zephir_array_fetch_string(&_9, &data, SL("service"), PH_NOISY | PH_READONLY, "pacos/Instance.zep", 198);
+	zephir_array_fetch_string(&_9, &data, SL("service"), PH_NOISY | PH_READONLY, "pacos/Instance.zep", 199);
 	zephir_array_update_string(&data, SL("serviceName"), &_9, PH_COPY | PH_SEPARATE);
 	object_init_ex(return_value, pacos_models_serviceinstance_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", &_4, 15, &data);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", &_4, 10, &data);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -591,7 +589,7 @@ PHP_METHOD(Pacos_Instance, beat) {
 	if (Z_TYPE_P(beat) == IS_ARRAY) {
 		ZEPHIR_INIT_VAR(&newBeat);
 		object_init_ex(&newBeat, pacos_models_beatinfo_ce);
-		ZEPHIR_CALL_METHOD(NULL, &newBeat, "__construct", NULL, 23, beat);
+		ZEPHIR_CALL_METHOD(NULL, &newBeat, "__construct", NULL, 18, beat);
 		zephir_check_call_status();
 	} else {
 		ZEPHIR_CPY_WRT(&newBeat, beat);
@@ -653,7 +651,7 @@ PHP_METHOD(Pacos_Instance, beat) {
 		ZEPHIR_CALL_METHOD(NULL, &result, "__construct", NULL, 0);
 		zephir_check_call_status();
 	}
-	zephir_array_fetch_string(&_9, &ret, SL("clientBeatInterval"), PH_NOISY | PH_READONLY, "pacos/Instance.zep", 239);
+	zephir_array_fetch_string(&_9, &ret, SL("clientBeatInterval"), PH_NOISY | PH_READONLY, "pacos/Instance.zep", 240);
 	zephir_update_property_zval(&result, ZEND_STRL("clientBeatInterval"), &_9);
 	RETURN_CCTOR(&result);
 
@@ -714,7 +712,7 @@ PHP_METHOD(Pacos_Instance, select) {
 	zephir_check_call_status();
 	zephir_read_property(&_2, &list, ZEND_STRL("hosts"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_fast_count_int(&_2) == 0) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(pacos_exceptions_pacosnamingnoaliveinstance_ce, "serviceName no alive instnace", "pacos/Instance.zep", 263);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(pacos_exceptions_pacosnamingnoaliveinstance_ce, "serviceName no alive instnace", "pacos/Instance.zep", 264);
 		return;
 	}
 	zephir_read_property(&_4, &list, ZEND_STRL("hosts"), PH_NOISY_CC | PH_READONLY);
@@ -848,10 +846,10 @@ PHP_METHOD(Pacos_Instance, cleanRegister) {
 	zephir_read_property(&_2, this_ptr, ZEND_STRL("shmSize"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_3);
 	ZVAL_STRING(&_3, "c");
-	ZEPHIR_CALL_FUNCTION(&shmId, "shmop_open", NULL, 24, &_0, &_3, &_1, &_2);
+	ZEPHIR_CALL_FUNCTION(&shmId, "shmop_open", NULL, 19, &_0, &_3, &_1, &_2);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&shmId))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "open memory failed", "pacos/Instance.zep", 308);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "open memory failed", "pacos/Instance.zep", 309);
 		return;
 	}
 	ZEPHIR_INIT_VAR(&infoLength);
@@ -862,9 +860,9 @@ PHP_METHOD(Pacos_Instance, cleanRegister) {
 	ZEPHIR_CALL_FUNCTION(&_5, "sprintf", NULL, 4, &_3, &_4, &info);
 	zephir_check_call_status();
 	ZVAL_LONG(&_4, 0);
-	ZEPHIR_CALL_FUNCTION(NULL, "shmop_write", NULL, 25, &shmId, &_5, &_4);
+	ZEPHIR_CALL_FUNCTION(NULL, "shmop_write", NULL, 20, &shmId, &_5, &_4);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(NULL, "shmop_close", NULL, 26, &shmId);
+	ZEPHIR_CALL_FUNCTION(NULL, "shmop_close", NULL, 21, &shmId);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -883,48 +881,55 @@ PHP_METHOD(Pacos_Instance, cleanRegister) {
 PHP_METHOD(Pacos_Instance, register) {
 
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
-	zephir_fcall_cache_entry *_23 = NULL;
+	zephir_fcall_cache_entry *_0 = NULL, *_30 = NULL;
 	zend_long timeout, ZEPHIR_LAST_CALL_STATUS;
-	zval instanceList;
-	zval *uniqueName_param = NULL, *instanceList_param = NULL, *timeout_param = NULL, *remote_param = NULL, __$true, _0, _1, _2, _3, shmId, _5, _6, _7, data, _8, _9, shmopLengthStr, shmopLength, _10, subData, _12, _13, _14, dataArr, _16, _17, _18, _19, jsonData, _20, _21, _22, _24, _4$$3;
-	zval uniqueName, remote, _11, _15;
+	zval instanceList, _24, _25;
+	zval *uniqueName_param = NULL, *instanceList_param = NULL, *timeout_param = NULL, *remote_param = NULL, __$true, _1, _2, _3, _4, _5, shmId, _9, _10, _11, data, _12, _13, shmopLengthStr, shmopLength, _14, subData, _16, _17, _18, dataArr, _20, _21, _22, _23, _26, jsonData, _27, _28, _29, _31, _32, _6$$3, _7$$3, _8$$3;
+	zval uniqueName, remote, _15, _19;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&uniqueName);
 	ZVAL_UNDEF(&remote);
-	ZVAL_UNDEF(&_11);
 	ZVAL_UNDEF(&_15);
+	ZVAL_UNDEF(&_19);
 	ZVAL_BOOL(&__$true, 1);
-	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&shmId);
+	ZVAL_UNDEF(&_4);
 	ZVAL_UNDEF(&_5);
-	ZVAL_UNDEF(&_6);
-	ZVAL_UNDEF(&_7);
-	ZVAL_UNDEF(&data);
-	ZVAL_UNDEF(&_8);
+	ZVAL_UNDEF(&shmId);
 	ZVAL_UNDEF(&_9);
-	ZVAL_UNDEF(&shmopLengthStr);
-	ZVAL_UNDEF(&shmopLength);
 	ZVAL_UNDEF(&_10);
-	ZVAL_UNDEF(&subData);
+	ZVAL_UNDEF(&_11);
+	ZVAL_UNDEF(&data);
 	ZVAL_UNDEF(&_12);
 	ZVAL_UNDEF(&_13);
+	ZVAL_UNDEF(&shmopLengthStr);
+	ZVAL_UNDEF(&shmopLength);
 	ZVAL_UNDEF(&_14);
-	ZVAL_UNDEF(&dataArr);
+	ZVAL_UNDEF(&subData);
 	ZVAL_UNDEF(&_16);
 	ZVAL_UNDEF(&_17);
 	ZVAL_UNDEF(&_18);
-	ZVAL_UNDEF(&_19);
-	ZVAL_UNDEF(&jsonData);
+	ZVAL_UNDEF(&dataArr);
 	ZVAL_UNDEF(&_20);
 	ZVAL_UNDEF(&_21);
 	ZVAL_UNDEF(&_22);
-	ZVAL_UNDEF(&_24);
-	ZVAL_UNDEF(&_4$$3);
+	ZVAL_UNDEF(&_23);
+	ZVAL_UNDEF(&_26);
+	ZVAL_UNDEF(&jsonData);
+	ZVAL_UNDEF(&_27);
+	ZVAL_UNDEF(&_28);
+	ZVAL_UNDEF(&_29);
+	ZVAL_UNDEF(&_31);
+	ZVAL_UNDEF(&_32);
+	ZVAL_UNDEF(&_6$$3);
+	ZVAL_UNDEF(&_7$$3);
+	ZVAL_UNDEF(&_8$$3);
 	ZVAL_UNDEF(&instanceList);
+	ZVAL_UNDEF(&_24);
+	ZVAL_UNDEF(&_25);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 2, 2, &uniqueName_param, &instanceList_param, &timeout_param, &remote_param);
@@ -944,52 +949,55 @@ PHP_METHOD(Pacos_Instance, register) {
 	}
 
 
-	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_VAR(&_1);
-	zephir_get_args(&_1);
-	zephir_json_encode(&_0, &_1, 0 );
 	ZEPHIR_INIT_VAR(&_2);
-	ZVAL_STRING(&_2, "instance.register:");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_2, &_0);
+	zephir_get_args(&_2);
+	zephir_read_property(&_3, this_ptr, ZEND_STRL("debug"), PH_NOISY_CC | PH_READONLY);
+	zephir_json_encode(&_1, &_2, zephir_get_intval(&_3) );
+	ZEPHIR_INIT_VAR(&_4);
+	ZVAL_STRING(&_4, "instance.register:");
+	ZEPHIR_CALL_CE_STATIC(NULL, pacos_utils_logs_ce, "log", &_0, 0, &_4, &_1);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_3, this_ptr, "limit", NULL, 0);
+	ZEPHIR_CALL_METHOD(&_5, this_ptr, "limit", NULL, 0);
 	zephir_check_call_status();
-	if (ZEPHIR_IS_TRUE(&_3)) {
-		ZEPHIR_INIT_VAR(&_4$$3);
-		ZVAL_STRING(&_4$$3, "instance.register:limit");
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_4$$3);
+	if (ZEPHIR_IS_TRUE(&_5)) {
+		zephir_read_property(&_6$$3, this_ptr, ZEND_STRL("debug"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_INIT_VAR(&_7$$3);
+		ZVAL_STRING(&_7$$3, "instance.register:limit");
+		ZVAL_NULL(&_8$$3);
+		ZEPHIR_CALL_CE_STATIC(NULL, pacos_utils_logs_ce, "log", &_0, 0, &_7$$3, &_8$$3, &_6$$3);
 		zephir_check_call_status();
 		RETURN_MM_BOOL(0);
 	}
-	zephir_read_property(&_5, this_ptr, ZEND_STRL("shmKey"), PH_NOISY_CC | PH_READONLY);
-	zephir_read_property(&_6, this_ptr, ZEND_STRL("defaultMode"), PH_NOISY_CC | PH_READONLY);
-	zephir_read_property(&_7, this_ptr, ZEND_STRL("shmSize"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_NVAR(&_2);
-	ZVAL_STRING(&_2, "c");
-	ZEPHIR_CALL_FUNCTION(&shmId, "shmop_open", NULL, 24, &_5, &_2, &_6, &_7);
+	zephir_read_property(&_9, this_ptr, ZEND_STRL("shmKey"), PH_NOISY_CC | PH_READONLY);
+	zephir_read_property(&_10, this_ptr, ZEND_STRL("defaultMode"), PH_NOISY_CC | PH_READONLY);
+	zephir_read_property(&_11, this_ptr, ZEND_STRL("shmSize"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_NVAR(&_4);
+	ZVAL_STRING(&_4, "c");
+	ZEPHIR_CALL_FUNCTION(&shmId, "shmop_open", NULL, 19, &_9, &_4, &_10, &_11);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&shmId))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "open memory failed", "pacos/Instance.zep", 335);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "open memory failed", "pacos/Instance.zep", 336);
 		return;
 	}
-	zephir_read_property(&_8, this_ptr, ZEND_STRL("defaultMode"), PH_NOISY_CC | PH_READONLY);
-	ZVAL_LONG(&_9, 0);
-	ZEPHIR_CALL_FUNCTION(&data, "shmop_read", NULL, 27, &shmId, &_9, &_8);
+	zephir_read_property(&_12, this_ptr, ZEND_STRL("defaultMode"), PH_NOISY_CC | PH_READONLY);
+	ZVAL_LONG(&_13, 0);
+	ZEPHIR_CALL_FUNCTION(&data, "shmop_read", NULL, 22, &shmId, &_13, &_12);
 	zephir_check_call_status();
-	ZVAL_LONG(&_9, 0);
-	ZVAL_LONG(&_10, 10);
-	ZEPHIR_INIT_NVAR(&_2);
-	zephir_substr(&_2, &data, 0 , 10 , 0);
-	zephir_get_strval(&_11, &_2);
-	ZEPHIR_CPY_WRT(&shmopLengthStr, &_11);
+	ZVAL_LONG(&_13, 0);
+	ZVAL_LONG(&_14, 10);
+	ZEPHIR_INIT_NVAR(&_4);
+	zephir_substr(&_4, &data, 0 , 10 , 0);
+	zephir_get_strval(&_15, &_4);
+	ZEPHIR_CPY_WRT(&shmopLengthStr, &_15);
 	ZEPHIR_INIT_VAR(&shmopLength);
 	ZVAL_LONG(&shmopLength, zephir_get_intval(&shmopLengthStr));
-	ZVAL_LONG(&_12, 10);
-	ZVAL_LONG(&_13, (zephir_get_numberval(&shmopLength) - 10));
-	ZEPHIR_INIT_VAR(&_14);
-	zephir_substr(&_14, &data, 10 , zephir_get_intval(&_13), 0);
-	zephir_get_strval(&_15, &_14);
-	ZEPHIR_CPY_WRT(&subData, &_15);
+	ZVAL_LONG(&_16, 10);
+	ZVAL_LONG(&_17, (zephir_get_numberval(&shmopLength) - 10));
+	ZEPHIR_INIT_VAR(&_18);
+	zephir_substr(&_18, &data, 10 , zephir_get_intval(&_17), 0);
+	zephir_get_strval(&_19, &_18);
+	ZEPHIR_CPY_WRT(&subData, &_19);
 
 	/* try_start_1: */
 
@@ -999,544 +1007,64 @@ PHP_METHOD(Pacos_Instance, register) {
 	try_end_1:
 
 	if (EG(exception)) {
-		ZEPHIR_INIT_VAR(&_16);
-		ZVAL_OBJ(&_16, EG(exception));
-		Z_ADDREF_P(&_16);
-		ZEPHIR_INIT_VAR(&_17);
-		if (zephir_instance_of_ev(&_16, zend_exception_get_default(TSRMLS_C))) {
+		ZEPHIR_INIT_VAR(&_20);
+		ZVAL_OBJ(&_20, EG(exception));
+		Z_ADDREF_P(&_20);
+		ZEPHIR_INIT_VAR(&_21);
+		if (zephir_instance_of_ev(&_20, zend_exception_get_default(TSRMLS_C))) {
 			zend_clear_exception(TSRMLS_C);
-			ZEPHIR_CPY_WRT(&_17, &_16);
+			ZEPHIR_CPY_WRT(&_21, &_20);
 			ZEPHIR_INIT_NVAR(&dataArr);
 			array_init(&dataArr);
 		}
 	}
-	ZEPHIR_INIT_VAR(&_18);
-	zephir_gettype(&_18, &dataArr);
-	if (!ZEPHIR_IS_STRING(&_18, "array")) {
+	ZEPHIR_INIT_VAR(&_22);
+	zephir_gettype(&_22, &dataArr);
+	if (!ZEPHIR_IS_STRING(&_22, "array")) {
 		ZEPHIR_INIT_NVAR(&dataArr);
 		array_init(&dataArr);
 	}
-	ZEPHIR_INIT_VAR(&_19);
-	zephir_md5(&_19, &uniqueName);
-	zephir_get_strval(&uniqueName, &_19);
-	zephir_array_update_zval(&dataArr, &uniqueName, &instanceList, PH_COPY | PH_SEPARATE);
+	ZEPHIR_INIT_VAR(&_23);
+	zephir_md5(&_23, &uniqueName);
+	zephir_get_strval(&uniqueName, &_23);
+	ZEPHIR_INIT_VAR(&_24);
+	zephir_create_array(&_24, 2, 0);
+	ZEPHIR_INIT_VAR(&_25);
+	zephir_create_array(&_25, 3, 0);
+	ZEPHIR_OBS_VAR(&_26);
+	zephir_read_property(&_26, this_ptr, ZEND_STRL("endpoint"), PH_NOISY_CC);
+	zephir_array_update_string(&_25, SL("endpoint"), &_26, PH_COPY | PH_SEPARATE);
+	ZEPHIR_OBS_NVAR(&_26);
+	zephir_read_property(&_26, this_ptr, ZEND_STRL("port"), PH_NOISY_CC);
+	zephir_array_update_string(&_25, SL("port"), &_26, PH_COPY | PH_SEPARATE);
+	ZEPHIR_OBS_NVAR(&_26);
+	zephir_read_property(&_26, this_ptr, ZEND_STRL("options"), PH_NOISY_CC);
+	zephir_array_update_string(&_25, SL("options"), &_26, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(&_24, SL("service"), &_25, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(&_24, SL("instance"), &instanceList, PH_COPY | PH_SEPARATE);
+	zephir_array_update_zval(&dataArr, &uniqueName, &_24, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_VAR(&jsonData);
 	zephir_json_encode(&jsonData, &dataArr, 0 );
-	ZEPHIR_INIT_VAR(&_20);
-	ZVAL_STRING(&_20, "%010s%s");
-	ZVAL_LONG(&_21, (zephir_fast_strlen_ev(&jsonData) + 10));
-	ZEPHIR_CALL_FUNCTION(&_22, "sprintf", &_23, 4, &_20, &_21, &jsonData);
+	ZEPHIR_INIT_VAR(&_27);
+	ZVAL_STRING(&_27, "%010s%s");
+	ZVAL_LONG(&_28, (zephir_fast_strlen_ev(&jsonData) + 10));
+	ZEPHIR_CALL_FUNCTION(&_29, "sprintf", &_30, 4, &_27, &_28, &jsonData);
 	zephir_check_call_status();
-	ZEPHIR_INIT_NVAR(&_20);
-	ZVAL_STRING(&_20, "instance.register.write");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_20, &_22);
+	zephir_read_property(&_28, this_ptr, ZEND_STRL("debug"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_NVAR(&_27);
+	ZVAL_STRING(&_27, "instance.register:write");
+	ZEPHIR_CALL_CE_STATIC(NULL, pacos_utils_logs_ce, "log", &_0, 0, &_27, &_29, &_28);
 	zephir_check_call_status();
-	ZEPHIR_INIT_NVAR(&_20);
-	ZVAL_STRING(&_20, "%010s%s");
-	ZVAL_LONG(&_21, (zephir_fast_strlen_ev(&jsonData) + 10));
-	ZEPHIR_CALL_FUNCTION(&_24, "sprintf", &_23, 4, &_20, &_21, &jsonData);
+	ZEPHIR_INIT_NVAR(&_27);
+	ZVAL_STRING(&_27, "%010s%s");
+	ZVAL_LONG(&_31, (zephir_fast_strlen_ev(&jsonData) + 10));
+	ZEPHIR_CALL_FUNCTION(&_32, "sprintf", &_30, 4, &_27, &_31, &jsonData);
 	zephir_check_call_status();
-	ZVAL_LONG(&_21, 0);
-	ZEPHIR_CALL_FUNCTION(NULL, "shmop_write", NULL, 25, &shmId, &_24, &_21);
+	ZVAL_LONG(&_31, 0);
+	ZEPHIR_CALL_FUNCTION(NULL, "shmop_write", NULL, 20, &shmId, &_32, &_31);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(NULL, "shmop_close", NULL, 26, &shmId);
+	ZEPHIR_CALL_FUNCTION(NULL, "shmop_close", NULL, 21, &shmId);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "backend", NULL, 0);
-	zephir_check_call_status();
-	ZEPHIR_MM_RESTORE();
-
-}
-
-/**
- * backend 
- *
- * @return 
- */
-PHP_METHOD(Pacos_Instance, backend) {
-
-	zval _0, backendPid, _1$$3;
-	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&backendPid);
-	ZVAL_UNDEF(&_1$$3);
-
-	ZEPHIR_MM_GROW();
-
-	ZEPHIR_INIT_VAR(&_0);
-	ZVAL_STRING(&_0, "instance.backend.start");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_0);
-	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&backendPid);
-	ZVAL_LONG(&backendPid, ZEPHIR_GLOBAL(instance_backend_pid));
-	if (ZEPHIR_GT_LONG(&backendPid, 0)) {
-		ZEPHIR_INIT_VAR(&_1$$3);
-		ZVAL_STRING(&_1$$3, "instance.backend.already");
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_1$$3);
-		zephir_check_call_status();
-		RETURN_MM_BOOL(1);
-	}
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "startjob", NULL, 0);
-	zephir_check_call_status();
-	ZEPHIR_MM_RESTORE();
-
-}
-
-/**
- * startJob 
- *
- * @return 
- */
-PHP_METHOD(Pacos_Instance, startJob) {
-
-	zend_bool _33$$12;
-	zval _25$$12;
-	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
-	zval __$true, _0, backendPid, output, _4, pid, sid, _1$$3, _3$$4, oldPid$$5, _5$$5, _6$$5, _7$$7, _8$$7, _9$$8, _10$$9, _12$$12, shmId$$12, data$$12, dataArr$$12, item$$12, _16$$12, _17$$12, _18$$12, _19$$12, _21$$12, _22$$12, shmopLengthStr$$12, shmopLength$$12, _24$$12, subData$$12, _26$$12, _27$$12, _28$$12, _29$$12, _30$$12, _31$$12, _32$$12, _34$$12, subItem$$12, *_36$$12, _37$$12, _52$$12, _13$$14, _14$$14, _35$$19, *_38$$20, _39$$20, _40$$21, _41$$21, _43$$23, _44$$23, *_45$$25, _46$$25, _47$$26, _48$$26, _49$$28, _50$$28, _54$$30;
-	zephir_fcall_cache_entry *_2 = NULL, *_11 = NULL, *_15 = NULL, *_20 = NULL, *_23 = NULL, *_42 = NULL, *_51 = NULL, *_53 = NULL;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *this_ptr = getThis();
-
-	ZVAL_BOOL(&__$true, 1);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&backendPid);
-	ZVAL_UNDEF(&output);
-	ZVAL_UNDEF(&_4);
-	ZVAL_UNDEF(&pid);
-	ZVAL_UNDEF(&sid);
-	ZVAL_UNDEF(&_1$$3);
-	ZVAL_UNDEF(&_3$$4);
-	ZVAL_UNDEF(&oldPid$$5);
-	ZVAL_UNDEF(&_5$$5);
-	ZVAL_UNDEF(&_6$$5);
-	ZVAL_UNDEF(&_7$$7);
-	ZVAL_UNDEF(&_8$$7);
-	ZVAL_UNDEF(&_9$$8);
-	ZVAL_UNDEF(&_10$$9);
-	ZVAL_UNDEF(&_12$$12);
-	ZVAL_UNDEF(&shmId$$12);
-	ZVAL_UNDEF(&data$$12);
-	ZVAL_UNDEF(&dataArr$$12);
-	ZVAL_UNDEF(&item$$12);
-	ZVAL_UNDEF(&_16$$12);
-	ZVAL_UNDEF(&_17$$12);
-	ZVAL_UNDEF(&_18$$12);
-	ZVAL_UNDEF(&_19$$12);
-	ZVAL_UNDEF(&_21$$12);
-	ZVAL_UNDEF(&_22$$12);
-	ZVAL_UNDEF(&shmopLengthStr$$12);
-	ZVAL_UNDEF(&shmopLength$$12);
-	ZVAL_UNDEF(&_24$$12);
-	ZVAL_UNDEF(&subData$$12);
-	ZVAL_UNDEF(&_26$$12);
-	ZVAL_UNDEF(&_27$$12);
-	ZVAL_UNDEF(&_28$$12);
-	ZVAL_UNDEF(&_29$$12);
-	ZVAL_UNDEF(&_30$$12);
-	ZVAL_UNDEF(&_31$$12);
-	ZVAL_UNDEF(&_32$$12);
-	ZVAL_UNDEF(&_34$$12);
-	ZVAL_UNDEF(&subItem$$12);
-	ZVAL_UNDEF(&_37$$12);
-	ZVAL_UNDEF(&_52$$12);
-	ZVAL_UNDEF(&_13$$14);
-	ZVAL_UNDEF(&_14$$14);
-	ZVAL_UNDEF(&_35$$19);
-	ZVAL_UNDEF(&_39$$20);
-	ZVAL_UNDEF(&_40$$21);
-	ZVAL_UNDEF(&_41$$21);
-	ZVAL_UNDEF(&_43$$23);
-	ZVAL_UNDEF(&_44$$23);
-	ZVAL_UNDEF(&_46$$25);
-	ZVAL_UNDEF(&_47$$26);
-	ZVAL_UNDEF(&_48$$26);
-	ZVAL_UNDEF(&_49$$28);
-	ZVAL_UNDEF(&_50$$28);
-	ZVAL_UNDEF(&_54$$30);
-	ZVAL_UNDEF(&_25$$12);
-
-	ZEPHIR_MM_GROW();
-
-	ZEPHIR_INIT_VAR(&_0);
-	ZVAL_STRING(&_0, "instance.startJob.start");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_0);
-	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&backendPid);
-	ZVAL_LONG(&backendPid, ZEPHIR_GLOBAL(instance_backend_pid));
-	if (ZEPHIR_GT_LONG(&backendPid, 0)) {
-		ZEPHIR_INIT_VAR(&_1$$3);
-		ZEPHIR_CONCAT_SV(&_1$$3, "ps -p ", &backendPid);
-		ZEPHIR_MAKE_REF(&output);
-		ZEPHIR_CALL_FUNCTION(NULL, "exec", &_2, 28, &_1$$3, &output);
-		ZEPHIR_UNREF(&output);
-		zephir_check_call_status();
-		if (zephir_fast_count_int(&output) >= 2) {
-			ZEPHIR_INIT_VAR(&_3$$4);
-			ZVAL_STRING(&_3$$4, "instance.startJob.already");
-			ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_3$$4);
-			zephir_check_call_status();
-			RETURN_MM_BOOL(1);
-		}
-	}
-	zephir_read_property(&_4, this_ptr, ZEND_STRL("beat_run_mode"), PH_NOISY_CC | PH_READONLY);
-	if (ZEPHIR_IS_LONG(&_4, 1)) {
-		zephir_read_property(&_5$$5, this_ptr, ZEND_STRL("beat_pid_file"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_FUNCTION(&_6$$5, "is_file", NULL, 29, &_5$$5);
-		zephir_check_call_status();
-		if (zephir_is_true(&_6$$5)) {
-
-			/* try_start_1: */
-
-				zephir_read_property(&_7$$7, this_ptr, ZEND_STRL("beat_pid_file"), PH_NOISY_CC | PH_READONLY);
-				ZEPHIR_INIT_VAR(&oldPid$$5);
-				zephir_file_get_contents(&oldPid$$5, &_7$$7);
-				ZEPHIR_INIT_VAR(&_8$$7);
-				ZEPHIR_CONCAT_SV(&_8$$7, "ps -p ", &oldPid$$5);
-				ZEPHIR_MAKE_REF(&output);
-				ZEPHIR_CALL_FUNCTION(NULL, "exec", &_2, 28, &_8$$7, &output);
-				ZEPHIR_UNREF(&output);
-				zephir_check_call_status_or_jump(try_end_1);
-				if (zephir_fast_count_int(&output) >= 2) {
-					ZEPHIR_INIT_VAR(&_9$$8);
-					ZVAL_STRING(&_9$$8, "instance.startJob.already");
-					ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_9$$8);
-					zephir_check_call_status_or_jump(try_end_1);
-					RETURN_MM_BOOL(1);
-				}
-
-			try_end_1:
-
-			zend_clear_exception(TSRMLS_C);
-		}
-	}
-	ZEPHIR_CALL_FUNCTION(&pid, "pcntl_fork", NULL, 30);
-	zephir_check_call_status();
-	if (ZEPHIR_GT_LONG(&pid, 0)) {
-		ZEPHIR_INIT_VAR(&_10$$9);
-		ZVAL_STRING(&_10$$9, "instance.startJob.pid:");
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_10$$9, &pid);
-		zephir_check_call_status();
-		ZEPHIR_GLOBAL(instance_backend_pid) = Z_LVAL_P(&pid);
-		RETURN_MM_NULL();
-	} else if (ZEPHIR_IS_LONG(&pid, -1)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "fork child error", "pacos/Instance.zep", 420);
-		return;
-	}
-	ZEPHIR_CALL_FUNCTION(&sid, "posix_setsid", NULL, 31);
-	zephir_check_call_status();
-	if (ZEPHIR_LT_LONG(&sid, 0)) {
-		RETURN_MM_NULL();
-	}
-	ZEPHIR_GLOBAL(instance_backend_pid) = Z_LVAL_P(&sid);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "instance.startJob.sid:");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_0, &sid);
-	zephir_check_call_status();
-	while (1) {
-		ZEPHIR_CALL_FUNCTION(&pid, "getmypid", &_11, 32);
-		zephir_check_call_status();
-		ZEPHIR_GLOBAL(instance_backend_pid) = Z_LVAL_P(&pid);
-		zephir_read_property(&_12$$12, this_ptr, ZEND_STRL("beat_run_mode"), PH_NOISY_CC | PH_READONLY);
-		if (ZEPHIR_IS_LONG(&_12$$12, 1)) {
-
-			/* try_start_2: */
-
-				zephir_read_property(&_13$$14, this_ptr, ZEND_STRL("beat_pid_file"), PH_NOISY_CC | PH_READONLY);
-				ZVAL_LONG(&_14$$14, 2);
-				ZEPHIR_CALL_FUNCTION(NULL, "file_put_contents", &_15, 8, &_13$$14, &pid, &_14$$14);
-				zephir_check_call_status_or_jump(try_end_2);
-
-			try_end_2:
-
-			zend_clear_exception(TSRMLS_C);
-		}
-		zephir_read_property(&_16$$12, this_ptr, ZEND_STRL("shmKey"), PH_NOISY_CC | PH_READONLY);
-		zephir_read_property(&_17$$12, this_ptr, ZEND_STRL("defaultMode"), PH_NOISY_CC | PH_READONLY);
-		zephir_read_property(&_18$$12, this_ptr, ZEND_STRL("shmSize"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_INIT_NVAR(&_19$$12);
-		ZVAL_STRING(&_19$$12, "a");
-		ZEPHIR_CALL_FUNCTION(&shmId$$12, "shmop_open", &_20, 24, &_16$$12, &_19$$12, &_17$$12, &_18$$12);
-		zephir_check_call_status();
-		if (!(zephir_is_true(&shmId$$12))) {
-			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "open memory failed", "pacos/Instance.zep", 443);
-			return;
-		}
-		zephir_read_property(&_21$$12, this_ptr, ZEND_STRL("shmSize"), PH_NOISY_CC | PH_READONLY);
-		ZVAL_LONG(&_22$$12, 0);
-		ZEPHIR_CALL_FUNCTION(&data$$12, "shmop_read", &_23, 27, &shmId$$12, &_22$$12, &_21$$12);
-		zephir_check_call_status();
-		ZEPHIR_INIT_NVAR(&_19$$12);
-		ZVAL_STRING(&_19$$12, "instance.startJob.shmop.read");
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_19$$12, &data$$12);
-		zephir_check_call_status();
-		ZVAL_LONG(&_22$$12, 0);
-		ZVAL_LONG(&_24$$12, 10);
-		ZEPHIR_INIT_NVAR(&_19$$12);
-		zephir_substr(&_19$$12, &data$$12, 0 , 10 , 0);
-		zephir_get_strval(&_25$$12, &_19$$12);
-		ZEPHIR_CPY_WRT(&shmopLengthStr$$12, &_25$$12);
-		ZEPHIR_INIT_NVAR(&shmopLength$$12);
-		ZVAL_LONG(&shmopLength$$12, zephir_get_intval(&shmopLengthStr$$12));
-		ZVAL_LONG(&_26$$12, 10);
-		ZVAL_LONG(&_27$$12, (zephir_get_numberval(&shmopLength$$12) - 10));
-		ZEPHIR_INIT_NVAR(&subData$$12);
-		zephir_substr(&subData$$12, &data$$12, 10 , zephir_get_intval(&_27$$12), 0);
-		ZEPHIR_INIT_NVAR(&_28$$12);
-		ZVAL_STRING(&_28$$12, "instance.startJob.shmop.read");
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_28$$12, &subData$$12);
-		zephir_check_call_status();
-
-		/* try_start_3: */
-
-			ZEPHIR_INIT_NVAR(&dataArr$$12);
-			zephir_json_decode(&dataArr$$12, &subData$$12, zephir_get_intval(&__$true) );
-
-		try_end_3:
-
-		if (EG(exception)) {
-			ZEPHIR_INIT_NVAR(&_28$$12);
-			ZVAL_OBJ(&_28$$12, EG(exception));
-			Z_ADDREF_P(&_28$$12);
-			ZEPHIR_INIT_NVAR(&_29$$12);
-			if (zephir_instance_of_ev(&_28$$12, zend_exception_get_default(TSRMLS_C))) {
-				zend_clear_exception(TSRMLS_C);
-				ZEPHIR_CPY_WRT(&_29$$12, &_28$$12);
-				ZEPHIR_INIT_NVAR(&dataArr$$12);
-				array_init(&dataArr$$12);
-			}
-		}
-		ZEPHIR_INIT_NVAR(&_30$$12);
-		zephir_gettype(&_30$$12, &dataArr$$12);
-		if (!ZEPHIR_IS_STRING(&_30$$12, "array")) {
-			ZEPHIR_INIT_NVAR(&dataArr$$12);
-			array_init(&dataArr$$12);
-		}
-		ZEPHIR_INIT_NVAR(&_31$$12);
-		zephir_json_encode(&_31$$12, &dataArr$$12, 0 );
-		ZEPHIR_INIT_NVAR(&_32$$12);
-		ZVAL_STRING(&_32$$12, "instance.startJob.beat");
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_32$$12, &_31$$12);
-		zephir_check_call_status();
-		_33$$12 = ZEPHIR_IS_EMPTY(&dataArr$$12);
-		if (_33$$12) {
-			ZEPHIR_OBS_NVAR(&_34$$12);
-			zephir_read_property(&_34$$12, this_ptr, ZEND_STRL("auto_close"), PH_NOISY_CC);
-			_33$$12 = !(ZEPHIR_IS_EMPTY(&_34$$12));
-		}
-		if (_33$$12) {
-			ZEPHIR_INIT_NVAR(&_35$$19);
-			ZVAL_STRING(&_35$$19, "instance.startJob.auto_close");
-			ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_35$$19);
-			zephir_check_call_status();
-			break;
-		}
-		zephir_is_iterable(&dataArr$$12, 0, "pacos/Instance.zep", 478);
-		if (Z_TYPE_P(&dataArr$$12) == IS_ARRAY) {
-			ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&dataArr$$12), _36$$12)
-			{
-				ZEPHIR_INIT_NVAR(&item$$12);
-				ZVAL_COPY(&item$$12, _36$$12);
-				zephir_is_iterable(&item$$12, 0, "pacos/Instance.zep", 477);
-				if (Z_TYPE_P(&item$$12) == IS_ARRAY) {
-					ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&item$$12), _38$$20)
-					{
-						ZEPHIR_INIT_NVAR(&subItem$$12);
-						ZVAL_COPY(&subItem$$12, _38$$20);
-						ZEPHIR_INIT_NVAR(&_40$$21);
-						zephir_json_encode(&_40$$21, &subItem$$12, 0 );
-						ZEPHIR_INIT_NVAR(&_41$$21);
-						ZVAL_STRING(&_41$$21, "instance.startJob.beat.detail");
-						ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_41$$21, &_40$$21);
-						zephir_check_call_status();
-
-						/* try_start_4: */
-
-							ZEPHIR_CALL_METHOD(NULL, this_ptr, "beat", &_42, 0, &subItem$$12);
-							zephir_check_call_status_or_jump(try_end_4);
-
-						try_end_4:
-
-						zend_clear_exception(TSRMLS_C);
-					} ZEND_HASH_FOREACH_END();
-				} else {
-					ZEPHIR_CALL_METHOD(NULL, &item$$12, "rewind", NULL, 0);
-					zephir_check_call_status();
-					while (1) {
-						ZEPHIR_CALL_METHOD(&_39$$20, &item$$12, "valid", NULL, 0);
-						zephir_check_call_status();
-						if (!zend_is_true(&_39$$20)) {
-							break;
-						}
-						ZEPHIR_CALL_METHOD(&subItem$$12, &item$$12, "current", NULL, 0);
-						zephir_check_call_status();
-							ZEPHIR_INIT_NVAR(&_43$$23);
-							zephir_json_encode(&_43$$23, &subItem$$12, 0 );
-							ZEPHIR_INIT_NVAR(&_44$$23);
-							ZVAL_STRING(&_44$$23, "instance.startJob.beat.detail");
-							ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_44$$23, &_43$$23);
-							zephir_check_call_status();
-
-							/* try_start_5: */
-
-								ZEPHIR_CALL_METHOD(NULL, this_ptr, "beat", &_42, 0, &subItem$$12);
-								zephir_check_call_status_or_jump(try_end_5);
-
-							try_end_5:
-
-							zend_clear_exception(TSRMLS_C);
-						ZEPHIR_CALL_METHOD(NULL, &item$$12, "next", NULL, 0);
-						zephir_check_call_status();
-					}
-				}
-				ZEPHIR_INIT_NVAR(&subItem$$12);
-			} ZEND_HASH_FOREACH_END();
-		} else {
-			ZEPHIR_CALL_METHOD(NULL, &dataArr$$12, "rewind", NULL, 0);
-			zephir_check_call_status();
-			while (1) {
-				ZEPHIR_CALL_METHOD(&_37$$12, &dataArr$$12, "valid", NULL, 0);
-				zephir_check_call_status();
-				if (!zend_is_true(&_37$$12)) {
-					break;
-				}
-				ZEPHIR_CALL_METHOD(&item$$12, &dataArr$$12, "current", NULL, 0);
-				zephir_check_call_status();
-					zephir_is_iterable(&item$$12, 0, "pacos/Instance.zep", 477);
-					if (Z_TYPE_P(&item$$12) == IS_ARRAY) {
-						ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&item$$12), _45$$25)
-						{
-							ZEPHIR_INIT_NVAR(&subItem$$12);
-							ZVAL_COPY(&subItem$$12, _45$$25);
-							ZEPHIR_INIT_NVAR(&_47$$26);
-							zephir_json_encode(&_47$$26, &subItem$$12, 0 );
-							ZEPHIR_INIT_NVAR(&_48$$26);
-							ZVAL_STRING(&_48$$26, "instance.startJob.beat.detail");
-							ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_48$$26, &_47$$26);
-							zephir_check_call_status();
-
-							/* try_start_6: */
-
-								ZEPHIR_CALL_METHOD(NULL, this_ptr, "beat", &_42, 0, &subItem$$12);
-								zephir_check_call_status_or_jump(try_end_6);
-
-							try_end_6:
-
-							zend_clear_exception(TSRMLS_C);
-						} ZEND_HASH_FOREACH_END();
-					} else {
-						ZEPHIR_CALL_METHOD(NULL, &item$$12, "rewind", NULL, 0);
-						zephir_check_call_status();
-						while (1) {
-							ZEPHIR_CALL_METHOD(&_46$$25, &item$$12, "valid", NULL, 0);
-							zephir_check_call_status();
-							if (!zend_is_true(&_46$$25)) {
-								break;
-							}
-							ZEPHIR_CALL_METHOD(&subItem$$12, &item$$12, "current", NULL, 0);
-							zephir_check_call_status();
-								ZEPHIR_INIT_NVAR(&_49$$28);
-								zephir_json_encode(&_49$$28, &subItem$$12, 0 );
-								ZEPHIR_INIT_NVAR(&_50$$28);
-								ZVAL_STRING(&_50$$28, "instance.startJob.beat.detail");
-								ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_50$$28, &_49$$28);
-								zephir_check_call_status();
-
-								/* try_start_7: */
-
-									ZEPHIR_CALL_METHOD(NULL, this_ptr, "beat", &_42, 0, &subItem$$12);
-									zephir_check_call_status_or_jump(try_end_7);
-
-								try_end_7:
-
-								zend_clear_exception(TSRMLS_C);
-							ZEPHIR_CALL_METHOD(NULL, &item$$12, "next", NULL, 0);
-							zephir_check_call_status();
-						}
-					}
-					ZEPHIR_INIT_NVAR(&subItem$$12);
-				ZEPHIR_CALL_METHOD(NULL, &dataArr$$12, "next", NULL, 0);
-				zephir_check_call_status();
-			}
-		}
-		ZEPHIR_INIT_NVAR(&item$$12);
-		ZEPHIR_CALL_FUNCTION(NULL, "shmop_close", &_51, 26, &shmId$$12);
-		zephir_check_call_status();
-		zephir_read_property(&_52$$12, this_ptr, ZEND_STRL("defaultPeriod"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_FUNCTION(NULL, "sleep", &_53, 33, &_52$$12);
-		zephir_check_call_status();
-		if (ZEPHIR_GLOBAL(instance_close_sign) > 0) {
-			ZEPHIR_INIT_NVAR(&_54$$30);
-			ZVAL_STRING(&_54$$30, "instance.startJob.finish");
-			ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_54$$30);
-			zephir_check_call_status();
-			break;
-		}
-	}
-	ZEPHIR_MM_RESTORE();
-
-}
-
-/**
- * stopJob 
- *
- * @return 
- */
-PHP_METHOD(Pacos_Instance, stopJob) {
-
-	zval _0, backendPid, _3, _1$$3, oldPid$$4, _4$$4, _5$$4, _6$$6, _7$$6;
-	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
-	zephir_fcall_cache_entry *_2 = NULL;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&backendPid);
-	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&_1$$3);
-	ZVAL_UNDEF(&oldPid$$4);
-	ZVAL_UNDEF(&_4$$4);
-	ZVAL_UNDEF(&_5$$4);
-	ZVAL_UNDEF(&_6$$6);
-	ZVAL_UNDEF(&_7$$6);
-
-	ZEPHIR_MM_GROW();
-
-	ZEPHIR_INIT_VAR(&_0);
-	ZVAL_STRING(&_0, "instance.startJob.stop");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_0);
-	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&backendPid);
-	ZVAL_LONG(&backendPid, ZEPHIR_GLOBAL(instance_backend_pid));
-	if (ZEPHIR_GT_LONG(&backendPid, 0)) {
-		ZEPHIR_INIT_VAR(&_1$$3);
-		ZEPHIR_CONCAT_SV(&_1$$3, "kill -USR1 ", &backendPid);
-		ZEPHIR_CALL_FUNCTION(NULL, "exec", &_2, 28, &_1$$3);
-		zephir_check_call_status();
-	}
-	zephir_read_property(&_3, this_ptr, ZEND_STRL("beat_run_mode"), PH_NOISY_CC | PH_READONLY);
-	if (ZEPHIR_IS_LONG(&_3, 1)) {
-		zephir_read_property(&_4$$4, this_ptr, ZEND_STRL("beat_pid_file"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_FUNCTION(&_5$$4, "is_file", NULL, 29, &_4$$4);
-		zephir_check_call_status();
-		if (zephir_is_true(&_5$$4)) {
-
-			/* try_start_1: */
-
-				zephir_read_property(&_6$$6, this_ptr, ZEND_STRL("beat_pid_file"), PH_NOISY_CC | PH_READONLY);
-				ZEPHIR_INIT_VAR(&oldPid$$4);
-				zephir_file_get_contents(&oldPid$$4, &_6$$6);
-				ZEPHIR_INIT_VAR(&_7$$6);
-				ZEPHIR_CONCAT_SV(&_7$$6, "kill -USR1 ", &oldPid$$4);
-				ZEPHIR_CALL_FUNCTION(NULL, "exec", &_2, 28, &_7$$6);
-				zephir_check_call_status_or_jump(try_end_1);
-
-			try_end_1:
-
-			zend_clear_exception(TSRMLS_C);
-		}
-	}
 	ZEPHIR_MM_RESTORE();
 
 }
