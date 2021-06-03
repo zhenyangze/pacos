@@ -24,15 +24,24 @@ extension=pacos.so
 
 ;1全局进程 2独立进程
 pacos_run_mode=1
+
+;进程保存文件
 pacos_pid_file=/tmp/pacos.beat.test.pid
-;心跳周期
+
+;心跳周期(秒)
 pacos_period_time=10
-;请求超时时间
+
+;请求超时时间(秒)
 pacos_http_timeout=3
+
 ;namespace可不写，默认为public
-;pacos_namespace=sit
+;pacos_namespace=public
+
 ;1展示异常信息
 pacos_display_error=1 
+
+;父进程检测周期(秒)
+;pacos_check_period_time=5
 ```
 
 
