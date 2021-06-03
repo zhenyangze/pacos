@@ -256,7 +256,7 @@ $instance->register(array $instanceList)
 示例
 
 ```php
-$instance->register(__[
+$instance->register([
     [
         'ip' => '127.0.0.1',
         'port' => 80,
