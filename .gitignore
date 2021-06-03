@@ -17,3 +17,4 @@ run-tests.php
 *.lo
 pacos.la
 pacos.loT
+kernel/*.h.gch
