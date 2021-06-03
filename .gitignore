@@ -16,3 +16,4 @@ run-tests.php
 .libs
 *.lo
 pacos.la
+pacos.loT

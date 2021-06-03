@@ -353,7 +353,7 @@ PHP_METHOD(Pacos_Config, get) {
 		ZEPHIR_CALL_FUNCTION(&_46$$24, "sprintf", NULL, 4, &_45$$24, &dataId, &group, &_44$$24);
 		zephir_check_call_status();
 		ZVAL_LONG(&_47$$24, 404);
-		ZEPHIR_CALL_METHOD(NULL, &_43$$24, "__construct", NULL, 12, &_46$$24, &_47$$24);
+		ZEPHIR_CALL_METHOD(NULL, &_43$$24, "__construct", NULL, 9, &_46$$24, &_47$$24);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_43$$24, "pacos/Config.zep", 73);
 		ZEPHIR_MM_RESTORE();
@@ -540,7 +540,7 @@ PHP_METHOD(Pacos_Config, search) {
 		ZEPHIR_CALL_FUNCTION(&_11$$4, "sprintf", NULL, 4, &_10$$4, &dataId, &group, &_9$$4);
 		zephir_check_call_status();
 		ZVAL_LONG(&_12$$4, 404);
-		ZEPHIR_CALL_METHOD(NULL, &_8$$4, "__construct", NULL, 12, &_11$$4, &_12$$4);
+		ZEPHIR_CALL_METHOD(NULL, &_8$$4, "__construct", NULL, 9, &_11$$4, &_12$$4);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_8$$4, "pacos/Config.zep", 145);
 		ZEPHIR_MM_RESTORE();
@@ -791,7 +791,7 @@ PHP_METHOD(Pacos_Config, listen) {
 			if (Z_TYPE_P(&tmpCache) == IS_ARRAY) {
 				ZEPHIR_INIT_NVAR(&cacheObj);
 				object_init_ex(&cacheObj, pacos_models_configinfo_ce);
-				ZEPHIR_CALL_METHOD(NULL, &cacheObj, "__construct", &_2, 13, &tmpCache);
+				ZEPHIR_CALL_METHOD(NULL, &cacheObj, "__construct", &_2, 10, &tmpCache);
 				zephir_check_call_status();
 			} else {
 				ZEPHIR_CPY_WRT(&cacheObj, &tmpCache);
@@ -833,7 +833,7 @@ PHP_METHOD(Pacos_Config, listen) {
 				if (Z_TYPE_P(&tmpCache) == IS_ARRAY) {
 					ZEPHIR_INIT_NVAR(&cacheObj);
 					object_init_ex(&cacheObj, pacos_models_configinfo_ce);
-					ZEPHIR_CALL_METHOD(NULL, &cacheObj, "__construct", &_2, 13, &tmpCache);
+					ZEPHIR_CALL_METHOD(NULL, &cacheObj, "__construct", &_2, 10, &tmpCache);
 					zephir_check_call_status();
 				} else {
 					ZEPHIR_CPY_WRT(&cacheObj, &tmpCache);
@@ -913,7 +913,7 @@ PHP_METHOD(Pacos_Config, listen) {
 	ZVAL_STRING(&line, "");
 	ZEPHIR_INIT_VAR(&parts);
 	array_init(&parts);
-	ZEPHIR_CALL_FUNCTION(&_24, "urldecode", NULL, 14, &respString);
+	ZEPHIR_CALL_FUNCTION(&_24, "urldecode", NULL, 11, &respString);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_22);
 	ZVAL_STRING(&_22, "\x01");
@@ -931,7 +931,7 @@ PHP_METHOD(Pacos_Config, listen) {
 			zephir_fast_explode(&parts, &_27$$12, &line, LONG_MAX);
 			ZEPHIR_INIT_NVAR(&c);
 			object_init_ex(&c, pacos_models_configinfo_ce);
-			ZEPHIR_CALL_METHOD(NULL, &c, "__construct", &_2, 13);
+			ZEPHIR_CALL_METHOD(NULL, &c, "__construct", &_2, 10);
 			zephir_check_call_status();
 			if (zephir_fast_count_int(&parts) == 3) {
 				zephir_array_fetch_long(&_28$$13, &parts, 0, PH_NOISY | PH_READONLY, "pacos/Config.zep", 252);
@@ -967,7 +967,7 @@ PHP_METHOD(Pacos_Config, listen) {
 				zephir_fast_explode(&parts, &_33$$16, &line, LONG_MAX);
 				ZEPHIR_INIT_NVAR(&c);
 				object_init_ex(&c, pacos_models_configinfo_ce);
-				ZEPHIR_CALL_METHOD(NULL, &c, "__construct", &_2, 13);
+				ZEPHIR_CALL_METHOD(NULL, &c, "__construct", &_2, 10);
 				zephir_check_call_status();
 				if (zephir_fast_count_int(&parts) == 3) {
 					zephir_array_fetch_long(&_34$$17, &parts, 0, PH_NOISY | PH_READONLY, "pacos/Config.zep", 252);

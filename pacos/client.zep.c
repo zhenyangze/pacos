@@ -71,6 +71,11 @@ ZEPHIR_INIT_CLASS(Pacos_Client) {
 	zend_declare_property_long(pacos_client_ce, SL("defaultPeriod"), 10, ZEND_ACC_PROTECTED);
 
 	/**
+	 * defaultCheckPeriod
+	 */
+	zend_declare_property_double(pacos_client_ce, SL("defaultCheckPeriod"), 0.5, ZEND_ACC_PROTECTED);
+
+	/**
 	 * @var defaultMode
 	 */
 	zend_declare_property_long(pacos_client_ce, SL("defaultMode"), 0644, ZEND_ACC_PROTECTED);
@@ -107,6 +112,8 @@ ZEPHIR_INIT_CLASS(Pacos_Client) {
 	zephir_declare_class_constant_long(pacos_client_ce, SL("SHM_SIZE"), 1048576);
 
 	zephir_declare_class_constant_long(pacos_client_ce, SL("DEFAULT_PERIOD"), 10);
+
+	zephir_declare_class_constant_double(pacos_client_ce, SL("DEFAULT_CHECK_PERIOD"), 0.5);
 
 	zephir_declare_class_constant_long(pacos_client_ce, SL("DEFAULT_MODE"), 0644);
 
@@ -171,7 +178,7 @@ PHP_METHOD(Pacos_Client, __construct) {
 	zephir_update_property_zval(this_ptr, ZEND_STRL("port"), &_0);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "getvar", NULL, 0);
 	zephir_check_call_status();
-	zephir_is_iterable(&options, 0, "pacos/Client.zep", 110);
+	zephir_is_iterable(&options, 0, "pacos/Client.zep", 116);
 	if (Z_TYPE_P(&options) == IS_ARRAY) {
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&options), _3, _4, _1)
 		{
@@ -226,7 +233,7 @@ PHP_METHOD(Pacos_Client, getVar) {
 
 	zend_string *_3;
 	zend_ulong _2;
-	zval configList, tmpValue, key, value, *_0, _1, _5$$5, _6$$9;
+	zval configList, tmpValue, key, value, *_0, _1, defaultCheckPeriod, _6$$11;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zephir_fcall_cache_entry *_4 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
@@ -237,21 +244,23 @@ PHP_METHOD(Pacos_Client, getVar) {
 	ZVAL_UNDEF(&key);
 	ZVAL_UNDEF(&value);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_5$$5);
-	ZVAL_UNDEF(&_6$$9);
+	ZVAL_UNDEF(&defaultCheckPeriod);
+	ZVAL_UNDEF(&_6$$11);
 
 	ZEPHIR_MM_GROW();
 
 	ZEPHIR_INIT_VAR(&configList);
-	zephir_create_array(&configList, 7, 0);
+	zephir_create_array(&configList, 9, 0);
 	add_assoc_stringl_ex(&configList, SL("_namespace"), SL("pacos_namespace"));
 	add_assoc_stringl_ex(&configList, SL("beat_run_mode"), SL("pacos_run_mode"));
 	add_assoc_stringl_ex(&configList, SL("beat_pid_file"), SL("pacos_pid_file"));
 	add_assoc_stringl_ex(&configList, SL("defaultPeriod"), SL("pacos_period_time"));
+	add_assoc_stringl_ex(&configList, SL("defaultCheckPeriod"), SL("pacos_check_period_time"));
 	add_assoc_stringl_ex(&configList, SL("auto_close"), SL("pacos_auto_close"));
 	add_assoc_stringl_ex(&configList, SL("timeout"), SL("pacos_http_timeout"));
 	add_assoc_stringl_ex(&configList, SL("display_error"), SL("pacos_display_error"));
-	zephir_is_iterable(&configList, 0, "pacos/Client.zep", 144);
+	add_assoc_stringl_ex(&configList, SL("debug"), SL("pacos_debug"));
+	zephir_is_iterable(&configList, 0, "pacos/Client.zep", 153);
 	if (Z_TYPE_P(&configList) == IS_ARRAY) {
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&configList), _2, _3, _0)
 		{
@@ -268,9 +277,7 @@ PHP_METHOD(Pacos_Client, getVar) {
 			if (zephir_fast_strlen_ev(&tmpValue) > 0) {
 				zephir_update_property_zval_zval(this_ptr, &key, &tmpValue);
 				if (zephir_is_numeric(&tmpValue)) {
-					ZEPHIR_INIT_NVAR(&_5$$5);
-					ZVAL_LONG(&_5$$5, zephir_get_intval(&tmpValue));
-					zephir_update_property_zval_zval(this_ptr, &key, &_5$$5);
+					zephir_update_property_zval_zval(this_ptr, &key, &tmpValue);
 				} else {
 					zephir_update_property_zval_zval(this_ptr, &key, &tmpValue);
 				}
@@ -294,9 +301,7 @@ PHP_METHOD(Pacos_Client, getVar) {
 				if (zephir_fast_strlen_ev(&tmpValue) > 0) {
 					zephir_update_property_zval_zval(this_ptr, &key, &tmpValue);
 					if (zephir_is_numeric(&tmpValue)) {
-						ZEPHIR_INIT_NVAR(&_6$$9);
-						ZVAL_LONG(&_6$$9, zephir_get_intval(&tmpValue));
-						zephir_update_property_zval_zval(this_ptr, &key, &_6$$9);
+						zephir_update_property_zval_zval(this_ptr, &key, &tmpValue);
 					} else {
 						zephir_update_property_zval_zval(this_ptr, &key, &tmpValue);
 					}
@@ -307,6 +312,12 @@ PHP_METHOD(Pacos_Client, getVar) {
 	}
 	ZEPHIR_INIT_NVAR(&value);
 	ZEPHIR_INIT_NVAR(&key);
+	zephir_read_property(&defaultCheckPeriod, this_ptr, ZEND_STRL("defaultCheckPeriod"), PH_NOISY_CC | PH_READONLY);
+	if (ZEPHIR_LE_DOUBLE(&defaultCheckPeriod, 0.1)) {
+		ZEPHIR_INIT_ZVAL_NREF(_6$$11);
+		ZVAL_DOUBLE(&_6$$11, 0.5);
+		zephir_update_property_zval(this_ptr, ZEND_STRL("defaultCheckPeriod"), &_6$$11);
+	}
 	ZEPHIR_MM_RESTORE();
 
 }
@@ -434,18 +445,18 @@ PHP_METHOD(Pacos_Client, request) {
 	ZVAL_NULL(&timeout);
 	if (zephir_array_isset_string(&options, SL("timeout"))) {
 		ZEPHIR_OBS_NVAR(&timeout);
-		zephir_array_fetch_string(&timeout, &options, SL("timeout"), PH_NOISY, "pacos/Client.zep", 191);
+		zephir_array_fetch_string(&timeout, &options, SL("timeout"), PH_NOISY, "pacos/Client.zep", 203);
 	}
 	if (zephir_array_isset_string(&options, SL("headers"))) {
 		ZEPHIR_OBS_NVAR(&header);
-		zephir_array_fetch_string(&header, &options, SL("headers"), PH_NOISY, "pacos/Client.zep", 195);
+		zephir_array_fetch_string(&header, &options, SL("headers"), PH_NOISY, "pacos/Client.zep", 207);
 	}
 	if (zephir_array_isset_string(&options, SL("form_params"))) {
 		ZEPHIR_OBS_NVAR(&data);
-		zephir_array_fetch_string(&data, &options, SL("form_params"), PH_NOISY, "pacos/Client.zep", 199);
+		zephir_array_fetch_string(&data, &options, SL("form_params"), PH_NOISY, "pacos/Client.zep", 211);
 	}
 	if (zephir_array_isset_string(&options, SL("query"))) {
-		zephir_array_fetch_string(&_6$$9, &options, SL("query"), PH_NOISY | PH_READONLY, "pacos/Client.zep", 203);
+		zephir_array_fetch_string(&_6$$9, &options, SL("query"), PH_NOISY | PH_READONLY, "pacos/Client.zep", 215);
 		ZEPHIR_CALL_FUNCTION(&_7$$9, "http_build_query", NULL, 5, &_6$$9);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&_8$$9);
@@ -498,7 +509,7 @@ PHP_METHOD(Pacos_Client, assertResponse) {
 	object_init_ex(&_2, zend_exception_get_default(TSRMLS_C));
 	ZEPHIR_CALL_METHOD(NULL, &_2, "__construct", NULL, 6, message);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_2, "pacos/Client.zep", 224);
+	zephir_throw_exception_debug(&_2, "pacos/Client.zep", 236);
 	ZEPHIR_MM_RESTORE();
 	return;
 

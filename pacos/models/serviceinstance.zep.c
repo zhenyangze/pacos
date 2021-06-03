@@ -612,7 +612,7 @@ PHP_METHOD(Pacos_Models_ServiceInstance, filter) {
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_NVAR(&_0);
 	zephir_create_closure_ex(&_0, NULL, pacos_1__closure_ce, SL("__invoke"));
-	ZEPHIR_RETURN_CALL_FUNCTION("array_filter", NULL, 20, &data, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("array_filter", NULL, 17, &data, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 

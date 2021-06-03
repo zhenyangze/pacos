@@ -125,6 +125,7 @@ int zephir_greater_double(zval *op1, double op2);
 
 int zephir_less_equal(zval *op1, zval *op2);
 int zephir_less_equal_long(zval *op1, long op2);
+int zephir_less_equal_double(zval *op1, double op2);
 
 int zephir_greater_equal(zval *op1, zval *op2);
 int zephir_greater_equal_long(zval *op1, long op2);

@@ -125,7 +125,7 @@ PHP_METHOD(Pacos_Utils_Selector, randomByWeight) {
 	if (_8) {
 		ZVAL_LONG(&_9$$6, 0);
 		ZVAL_LONG(&_10$$6, (zephir_get_numberval(&totalWeight) - 1));
-		ZEPHIR_CALL_FUNCTION(&offset, "random_int", NULL, 42, &_9$$6, &_10$$6);
+		ZEPHIR_CALL_FUNCTION(&offset, "random_int", NULL, 44, &_9$$6, &_10$$6);
 		zephir_check_call_status();
 		_13$$6 = (zephir_get_numberval(&length) - 1);
 		_12$$6 = 1;
@@ -153,7 +153,7 @@ PHP_METHOD(Pacos_Utils_Selector, randomByWeight) {
 	}
 	ZVAL_LONG(&_17, 0);
 	ZVAL_LONG(&_18, (zephir_get_numberval(&length) - 1));
-	ZEPHIR_CALL_FUNCTION(&_19, "random_int", NULL, 42, &_17, &_18);
+	ZEPHIR_CALL_FUNCTION(&_19, "random_int", NULL, 44, &_17, &_18);
 	zephir_check_call_status();
 	zephir_array_fetch(&_16, &instances, &_19, PH_NOISY | PH_READONLY, "pacos/Utils/Selector.zep", 57);
 	RETURN_CTOR(&_16);

@@ -8,7 +8,6 @@
 #include "pacos/client.zep.h"
 #include "pacos/exceptions/pacosnamingnotfound.zep.h"
 #include "pacos/exceptions/pacosrequestexception.zep.h"
-#include "pacos/clients.zep.h"
 #include "pacos/config.zep.h"
 #include "pacos/exceptions/pacosconfignotfound.zep.h"
 #include "pacos/exceptions/pacosnamingnoaliveinstance.zep.h"

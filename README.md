@@ -238,16 +238,16 @@ $instance->beat([
 ]);
 ```
 
-#### 9、批量注册实例，并周期性发送心跳
+#### 9、批量注册实例，并周期性发送心跳(in fpm)
 
 ```php
-$instance->register(string $uniqueName, array $instanceList)
+$instance->register(array $instanceList)
 ```
 
 示例
 
 ```php
-$instance->register(__FILE__, [
+$instance->register(__[
     [
         'ip' => '127.0.0.1',
         'port' => 80,

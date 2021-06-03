@@ -137,26 +137,26 @@ PHP_METHOD(Pacos_Utils_Http, request) {
 	}
 
 
-	ZEPHIR_CALL_FUNCTION(&ch, "curl_init", NULL, 34);
+	ZEPHIR_CALL_FUNCTION(&ch, "curl_init", NULL, 36);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_fast_strtoupper(&_0, type);
 	ZEPHIR_CPY_WRT(type, &_0);
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "https://");
-	ZEPHIR_CALL_FUNCTION(&_1, "stripos", NULL, 35, url, &_0);
+	ZEPHIR_CALL_FUNCTION(&_1, "stripos", NULL, 37, url, &_0);
 	zephir_check_call_status();
 	if (!ZEPHIR_IS_FALSE_IDENTICAL(&_1)) {
 		ZVAL_LONG(&_2$$3, 64);
-		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_2$$3, &__$false);
+		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_2$$3, &__$false);
 		zephir_check_call_status();
 		ZVAL_LONG(&_2$$3, 81);
-		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_2$$3, &__$false);
+		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_2$$3, &__$false);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&_4$$3);
 		ZEPHIR_GET_CONSTANT(&_4$$3, "CURLOPT_SSLVERSION");
 		ZVAL_LONG(&_2$$3, 1);
-		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_4$$3, &_2$$3);
+		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_4$$3, &_2$$3);
 		zephir_check_call_status();
 	}
 	ZEPHIR_INIT_VAR(&querystring);
@@ -181,9 +181,9 @@ PHP_METHOD(Pacos_Utils_Http, request) {
 						{
 							ZEPHIR_INIT_NVAR(&val2);
 							ZVAL_COPY(&val2, _9$$6);
-							ZEPHIR_CALL_FUNCTION(&_11$$7, "urlencode", &_12, 37, &key);
+							ZEPHIR_CALL_FUNCTION(&_11$$7, "urlencode", &_12, 39, &key);
 							zephir_check_call_status();
-							ZEPHIR_CALL_FUNCTION(&_13$$7, "urlencode", &_12, 37, &val2);
+							ZEPHIR_CALL_FUNCTION(&_13$$7, "urlencode", &_12, 39, &val2);
 							zephir_check_call_status();
 							ZEPHIR_INIT_NVAR(&_14$$7);
 							ZEPHIR_CONCAT_VSVS(&_14$$7, &_11$$7, "=", &_13$$7, "&");
@@ -200,9 +200,9 @@ PHP_METHOD(Pacos_Utils_Http, request) {
 							}
 							ZEPHIR_CALL_METHOD(&val2, &val, "current", NULL, 0);
 							zephir_check_call_status();
-								ZEPHIR_CALL_FUNCTION(&_15$$8, "urlencode", &_12, 37, &key);
+								ZEPHIR_CALL_FUNCTION(&_15$$8, "urlencode", &_12, 39, &key);
 								zephir_check_call_status();
-								ZEPHIR_CALL_FUNCTION(&_16$$8, "urlencode", &_12, 37, &val2);
+								ZEPHIR_CALL_FUNCTION(&_16$$8, "urlencode", &_12, 39, &val2);
 								zephir_check_call_status();
 								ZEPHIR_INIT_NVAR(&_17$$8);
 								ZEPHIR_CONCAT_VSVS(&_17$$8, &_15$$8, "=", &_16$$8, "&");
@@ -213,9 +213,9 @@ PHP_METHOD(Pacos_Utils_Http, request) {
 					}
 					ZEPHIR_INIT_NVAR(&val2);
 				} else {
-					ZEPHIR_CALL_FUNCTION(&_18$$9, "urlencode", &_12, 37, &key);
+					ZEPHIR_CALL_FUNCTION(&_18$$9, "urlencode", &_12, 39, &key);
 					zephir_check_call_status();
-					ZEPHIR_CALL_FUNCTION(&_19$$9, "urlencode", &_12, 37, &val);
+					ZEPHIR_CALL_FUNCTION(&_19$$9, "urlencode", &_12, 39, &val);
 					zephir_check_call_status();
 					ZEPHIR_INIT_NVAR(&_20$$9);
 					ZEPHIR_CONCAT_VSVS(&_20$$9, &_18$$9, "=", &_19$$9, "&");
@@ -242,9 +242,9 @@ PHP_METHOD(Pacos_Utils_Http, request) {
 							{
 								ZEPHIR_INIT_NVAR(&val2);
 								ZVAL_COPY(&val2, _21$$11);
-								ZEPHIR_CALL_FUNCTION(&_23$$12, "urlencode", &_12, 37, &key);
+								ZEPHIR_CALL_FUNCTION(&_23$$12, "urlencode", &_12, 39, &key);
 								zephir_check_call_status();
-								ZEPHIR_CALL_FUNCTION(&_24$$12, "urlencode", &_12, 37, &val2);
+								ZEPHIR_CALL_FUNCTION(&_24$$12, "urlencode", &_12, 39, &val2);
 								zephir_check_call_status();
 								ZEPHIR_INIT_NVAR(&_25$$12);
 								ZEPHIR_CONCAT_VSVS(&_25$$12, &_23$$12, "=", &_24$$12, "&");
@@ -261,9 +261,9 @@ PHP_METHOD(Pacos_Utils_Http, request) {
 								}
 								ZEPHIR_CALL_METHOD(&val2, &val, "current", NULL, 0);
 								zephir_check_call_status();
-									ZEPHIR_CALL_FUNCTION(&_26$$13, "urlencode", &_12, 37, &key);
+									ZEPHIR_CALL_FUNCTION(&_26$$13, "urlencode", &_12, 39, &key);
 									zephir_check_call_status();
-									ZEPHIR_CALL_FUNCTION(&_27$$13, "urlencode", &_12, 37, &val2);
+									ZEPHIR_CALL_FUNCTION(&_27$$13, "urlencode", &_12, 39, &val2);
 									zephir_check_call_status();
 									ZEPHIR_INIT_NVAR(&_28$$13);
 									ZEPHIR_CONCAT_VSVS(&_28$$13, &_26$$13, "=", &_27$$13, "&");
@@ -274,9 +274,9 @@ PHP_METHOD(Pacos_Utils_Http, request) {
 						}
 						ZEPHIR_INIT_NVAR(&val2);
 					} else {
-						ZEPHIR_CALL_FUNCTION(&_29$$14, "urlencode", &_12, 37, &key);
+						ZEPHIR_CALL_FUNCTION(&_29$$14, "urlencode", &_12, 39, &key);
 						zephir_check_call_status();
-						ZEPHIR_CALL_FUNCTION(&_30$$14, "urlencode", &_12, 37, &val);
+						ZEPHIR_CALL_FUNCTION(&_30$$14, "urlencode", &_12, 39, &val);
 						zephir_check_call_status();
 						ZEPHIR_INIT_NVAR(&_31$$14);
 						ZEPHIR_CONCAT_VSVS(&_31$$14, &_29$$14, "=", &_30$$14, "&");
@@ -297,44 +297,44 @@ PHP_METHOD(Pacos_Utils_Http, request) {
 		ZEPHIR_CPY_WRT(&querystring, data);
 	}
 	ZVAL_LONG(&_35, 10002);
-	ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_35, url);
+	ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_35, url);
 	zephir_check_call_status();
 	if (!(ZEPHIR_IS_EMPTY(headers))) {
 		ZVAL_LONG(&_36$$16, 10023);
-		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_36$$16, headers);
+		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_36$$16, headers);
 		zephir_check_call_status();
 	}
 	ZVAL_LONG(&_35, 19913);
-	ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_35, &__$true);
+	ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_35, &__$true);
 	zephir_check_call_status();
 	ZVAL_LONG(&_35, 52);
-	ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_35, &__$true);
+	ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_35, &__$true);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_0);
 	ZEPHIR_GET_CONSTANT(&_0, "CURLOPT_HTTP_VERSION");
 	ZEPHIR_INIT_VAR(&_37);
 	ZEPHIR_GET_CONSTANT(&_37, "CURL_HTTP_VERSION_1_1");
-	ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_0, &_37);
+	ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_0, &_37);
 	zephir_check_call_status();
 	if (ZEPHIR_GT_LONG(connttime, 0)) {
 		ZVAL_LONG(&_38$$17, 156);
 		ZVAL_LONG(&_39$$17, (zephir_get_numberval(connttime) * 1000));
-		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_38$$17, &_39$$17);
+		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_38$$17, &_39$$17);
 		zephir_check_call_status();
 	}
 	if (ZEPHIR_GT_LONG(timeout, 0)) {
 		ZVAL_LONG(&_40$$18, 155);
 		ZVAL_LONG(&_41$$18, (zephir_get_numberval(timeout) * 1000));
-		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_40$$18, &_41$$18);
+		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_40$$18, &_41$$18);
 		zephir_check_call_status();
 	}
 	do {
 		if (ZEPHIR_IS_STRING(type, "POST")) {
 			ZVAL_LONG(&_42$$19, 47);
-			ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_42$$19, &__$true);
+			ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_42$$19, &__$true);
 			zephir_check_call_status();
 			ZVAL_LONG(&_42$$19, 10015);
-			ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_42$$19, &querystring);
+			ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_42$$19, &querystring);
 			zephir_check_call_status();
 			break;
 		}
@@ -342,10 +342,10 @@ PHP_METHOD(Pacos_Utils_Http, request) {
 			ZVAL_LONG(&_43$$20, 10036);
 			ZEPHIR_INIT_VAR(&_44$$20);
 			ZVAL_STRING(&_44$$20, "PUT");
-			ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_43$$20, &_44$$20);
+			ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_43$$20, &_44$$20);
 			zephir_check_call_status();
 			ZVAL_LONG(&_43$$20, 10015);
-			ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_43$$20, &querystring);
+			ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_43$$20, &querystring);
 			zephir_check_call_status();
 			break;
 		}
@@ -353,27 +353,27 @@ PHP_METHOD(Pacos_Utils_Http, request) {
 			ZVAL_LONG(&_45$$21, 10036);
 			ZEPHIR_INIT_VAR(&_46$$21);
 			ZVAL_STRING(&_46$$21, "DELETE");
-			ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_45$$21, &_46$$21);
+			ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_45$$21, &_46$$21);
 			zephir_check_call_status();
 			ZVAL_LONG(&_45$$21, 10015);
-			ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_45$$21, &querystring);
+			ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_45$$21, &querystring);
 			zephir_check_call_status();
 			break;
 		}
 		ZVAL_LONG(&_47$$22, 80);
-		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 36, &ch, &_47$$22, &__$true);
+		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_3, 38, &ch, &_47$$22, &__$true);
 		zephir_check_call_status();
 		break;
 	} while(0);
 
-	ZEPHIR_CALL_FUNCTION(&contents, "curl_exec", NULL, 38, &ch);
+	ZEPHIR_CALL_FUNCTION(&contents, "curl_exec", NULL, 40, &ch);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&httpCode, "curl_getinfo", NULL, 39, &ch);
+	ZEPHIR_CALL_FUNCTION(&httpCode, "curl_getinfo", NULL, 41, &ch);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(NULL, "curl_close", NULL, 40, &ch);
+	ZEPHIR_CALL_FUNCTION(NULL, "curl_close", NULL, 42, &ch);
 	zephir_check_call_status();
 	object_init_ex(return_value, pacos_utils_response_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 41, &contents, &httpCode);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 43, &contents, &httpCode);
 	zephir_check_call_status();
 	RETURN_MM();
 

@@ -15,6 +15,7 @@ PHP_METHOD(Pacos_Instance, cleanRegister);
 PHP_METHOD(Pacos_Instance, register);
 PHP_METHOD(Pacos_Instance, backend);
 PHP_METHOD(Pacos_Instance, startJob);
+PHP_METHOD(Pacos_Instance, sendBeat);
 PHP_METHOD(Pacos_Instance, stopJob);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_pacos_instance_add, 0, 0, 1)
@@ -149,23 +150,8 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_pacos_instance_cleanregister, 0, 0, 0)
 #endif
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_pacos_instance_register, 0, 0, 2)
-#if PHP_VERSION_ID >= 70200
-	ZEND_ARG_TYPE_INFO(0, uniqueName, IS_STRING, 0)
-#else
-	ZEND_ARG_INFO(0, uniqueName)
-#endif
+ZEND_BEGIN_ARG_INFO_EX(arginfo_pacos_instance_register, 0, 0, 1)
 	ZEND_ARG_ARRAY_INFO(0, instanceList, 0)
-#if PHP_VERSION_ID >= 70200
-	ZEND_ARG_TYPE_INFO(0, timeout, IS_LONG, 0)
-#else
-	ZEND_ARG_INFO(0, timeout)
-#endif
-#if PHP_VERSION_ID >= 70200
-	ZEND_ARG_TYPE_INFO(0, remote, IS_STRING, 0)
-#else
-	ZEND_ARG_INFO(0, remote)
-#endif
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(pacos_instance_method_entry) {
@@ -181,6 +167,7 @@ ZEPHIR_INIT_FUNCS(pacos_instance_method_entry) {
 	PHP_ME(Pacos_Instance, register, arginfo_pacos_instance_register, ZEND_ACC_PUBLIC)
 	PHP_ME(Pacos_Instance, backend, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Pacos_Instance, startJob, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Pacos_Instance, sendBeat, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Pacos_Instance, stopJob, NULL, ZEND_ACC_PUBLIC)
 	PHP_FE_END
 };

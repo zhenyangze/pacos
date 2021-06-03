@@ -111,7 +111,7 @@ PHP_METHOD(Pacos_Models_BeatInfo, jsonSerialize) {
 	ZEPHIR_INIT_VAR(&_2);
 	ZEPHIR_INIT_NVAR(&_2);
 	zephir_create_closure_ex(&_2, NULL, pacos_0__closure_ce, SL("__invoke"));
-	ZEPHIR_RETURN_CALL_FUNCTION("array_filter", NULL, 20, &_0, &_2);
+	ZEPHIR_RETURN_CALL_FUNCTION("array_filter", NULL, 17, &_0, &_2);
 	zephir_check_call_status();
 	RETURN_MM();
 
