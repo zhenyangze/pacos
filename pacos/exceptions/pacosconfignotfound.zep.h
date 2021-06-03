@@ -1,0 +1,5 @@
+
+extern zend_class_entry *pacos_exceptions_pacosconfignotfound_ce;
+
+ZEPHIR_INIT_CLASS(Pacos_Exceptions_PacosConfigNotFound);
+
