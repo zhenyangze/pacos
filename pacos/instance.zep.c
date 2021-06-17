@@ -1136,7 +1136,13 @@ PHP_METHOD(Pacos_Instance, startJob) {
     zephir_read_property(&pidFileName, this_ptr, ZEND_STRL("beat_pid_file"), PH_NOISY_CC | PH_READONLY);
     /**lock*/
     int fd =-1, ret =-1;
-    fd = open(&pidFileName, O_CREAT | O_TRUNC | O_RDWR, 0777);
+   
+    char *filePath;
+    if (Z_TYPE_P(&pidFileName) != IS_STRING) {
+        convert_to_string(&pidFileName);
+    }
+    filePath = Z_STRVAL_P(&pidFileName);
+    fd = open(filePath, O_CREAT | O_TRUNC | O_RDWR, 0777);
     if (fd <0)
     {
         return;
