@@ -247,7 +247,7 @@ $instance->beat([
 ]);
 ```
 
-#### 9、批量注册实例，并周期性发送心跳(in fpm)
+#### 9、批量注册实例，并周期性发送心跳(in fpm, swoole, cli-serve)
 
 ```php
 $instance->register(array $instanceList)
