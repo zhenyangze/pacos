@@ -24,13 +24,12 @@
 #include "kernel/concat.h"
 #include "kernel/file.h"
 #include "kernel/exit.h"
-#include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <sys/stat.h>
 #include <sys/file.h>
 #include <sys/types.h>
+#include <sys/time.h>
  
 
 
@@ -1144,12 +1143,20 @@ PHP_METHOD(Pacos_Instance, startJob) {
     fd = open(filePath, O_CREAT | O_TRUNC | O_RDWR, 0777);
     if (fd < 0)
     {
+        ZEPHIR_INIT_NVAR(&_0);
+        ZVAL_STRING(&_0, "instance.startJob.open file error");
+        ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_0, &ppid);
+        zephir_check_call_status();
         return;
     }
     ret = flock(fd, LOCK_NB | LOCK_EX); 
     if (ret < 0)
     {
         close(fd);
+        ZEPHIR_INIT_NVAR(&_0);
+        ZVAL_STRING(&_0, "instance.startJob.get lock error");
+        ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_0, &ppid);
+        zephir_check_call_status();
         return;
     }
 
@@ -1157,12 +1164,14 @@ PHP_METHOD(Pacos_Instance, startJob) {
         int cpid = fork();
         ZVAL_LONG(&pid, cpid);
         if (ZEPHIR_GT_LONG(&pid, 0)) {
-            ZEPHIR_INIT_NVAR(&_14$$12);
-            ZVAL_STRING(&_14$$12, "instance.startJob.pid");
-            ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_14$$12, &pid);
-            zephir_check_call_status();
-            ZEPHIR_GLOBAL(instance_backend_pid) = Z_LVAL_P(&pid);
-            RETURN_MM_NULL();
+            if (i == 0) {
+                ZEPHIR_GLOBAL(instance_backend_pid) = Z_LVAL_P(&pid);
+                flock(fd, LOCK_UN);
+                close(fd);
+                RETURN_MM_NULL();
+            } else {
+                exit(0);
+            }
         } else if (ZEPHIR_IS_LONG(&pid, -1)) {
             ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "fork child error", "pacos/Instance.zep", 446);
             return;
@@ -1173,11 +1182,9 @@ PHP_METHOD(Pacos_Instance, startJob) {
         {
             close(n);
         }
-
         setsid();
         chdir("/tmp");
     }
-
     flock(fd, LOCK_UN);
     close(fd);
 
@@ -1192,18 +1199,39 @@ PHP_METHOD(Pacos_Instance, startJob) {
     fd = open(filePath, O_CREAT | O_TRUNC | O_RDWR, 0777);
     if (fd < 0)
     {
+        ZEPHIR_INIT_NVAR(&_14$$12);
+        ZVAL_STRING(&_14$$12, "instance.startJob.try to open file error");
+        ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_14$$12, &pid);
+        zephir_check_call_status();
         exit(0);
         return;
     }
 
-    ret = flock(fd, LOCK_EX); 
-    ZEPHIR_INIT_NVAR(&_14$$12);
-    ZVAL_STRING(&_14$$12, "instance.startJob.get_lock");
-    ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_14$$12, &pid);
-    zephir_check_call_status();
+    float time_use=0;
+    struct timeval start;
+    struct timeval end;//struct timezone tz;
+    gettimeofday(&start,NULL); //gettimeofday(&start,&tz);
+    while(1)
+    {
+        ret = flock(fd, LOCK_EX | LOCK_NB);
+        if (ret >= 0) {
+            break;
+        }
+        gettimeofday(&end,NULL);
+        time_use = (end.tv_sec-start.tv_sec)*1000000+(end.tv_usec-start.tv_usec);//微秒
+        if(time_use >= 10000000)
+        {
+            break;
+        }
+        usleep(500);
+    }
 
     if (ret < 0)
     {
+        ZEPHIR_INIT_NVAR(&_14$$12);
+        ZVAL_STRING(&_14$$12, "instance.startJob.try to get lock error");
+        ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_14$$12, &pid);
+        zephir_check_call_status();
         close(fd);
         exit(0);
     }
@@ -1217,8 +1245,6 @@ PHP_METHOD(Pacos_Instance, startJob) {
     zephir_read_property(&timeLeft, this_ptr, ZEND_STRL("defaultPeriod"), PH_NOISY_CC);
     ZEPHIR_OBS_VAR(&timePeriod);
     zephir_read_property(&timePeriod, this_ptr, ZEND_STRL("defaultCheckPeriod"), PH_NOISY_CC);
-    ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &timePeriod);
-    zephir_check_call_status();
 
 	while (1) {
 		ZEPHIR_INIT_NVAR(&_2$$5);
