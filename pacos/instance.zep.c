@@ -1160,36 +1160,44 @@ PHP_METHOD(Pacos_Instance, startJob) {
         return;
     }
 
-    for (int i = 0; i < 2; i++) {
-        int cpid = fork();
-        ZVAL_LONG(&pid, cpid);
-        if (ZEPHIR_GT_LONG(&pid, 0)) {
-            if (i == 0) {
-                ZEPHIR_GLOBAL(instance_backend_pid) = Z_LVAL_P(&pid);
-                flock(fd, LOCK_UN);
-                close(fd);
-                RETURN_MM_NULL();
-            } else {
-                exit(0);
-            }
-        } else if (ZEPHIR_IS_LONG(&pid, -1)) {
-            ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "fork child error", "pacos/Instance.zep", 446);
-            return;
+    int cpid = fork();
+    ZVAL_LONG(&pid, cpid);
+    if (ZEPHIR_GT_LONG(&pid, 0)) {
+        int status;
+        if ((cpid = wait(&status)) != -1) {
+            ZEPHIR_GLOBAL(instance_backend_pid) = Z_LVAL_P(&pid);
+            flock(fd, LOCK_UN);
+            close(fd);
+            RETURN_MM_NULL();
         }
-
-        int max_fd = sysconf(_SC_OPEN_MAX);
-        for(int n = 0; n < max_fd; n++)
-        {
-            close(n);
-        }
-        setsid();
-        chdir("/tmp");
+    } else if (ZEPHIR_IS_LONG(&pid, -1)) {
+        ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "fork child error", "pacos/Instance.zep", 446);
+        return;
     }
+
+    setsid();
+
+    cpid = fork();
+    ZVAL_LONG(&pid, cpid);
+    if (ZEPHIR_GT_LONG(&pid, 0)) {
+        exit(0);
+    } else if (ZEPHIR_IS_LONG(&pid, -1)) {
+        ZEPHIR_THROW_EXCEPTION_DEBUG_STR(zend_exception_get_default(TSRMLS_C), "fork child error", "pacos/Instance.zep", 446);
+        exit(0);
+    }
+
+    int max_fd = sysconf(_SC_OPEN_MAX);
+    for(int n = 0; n < max_fd; n++)
+    {
+        close(n);
+    }
+
+    chdir("/tmp");
     flock(fd, LOCK_UN);
     close(fd);
 
-    ZEPHIR_CALL_FUNCTION(&pid, "posix_getpid", &_1, 28);
-    zephir_check_call_status();
+    cpid = getpid();
+    ZVAL_LONG(&pid, cpid);
 
     zephir_read_property(&pidFileName, this_ptr, ZEND_STRL("beat_pid_file"), PH_NOISY_CC | PH_READONLY);
     if (Z_TYPE_P(&pidFileName) != IS_STRING) {
