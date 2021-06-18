@@ -30,8 +30,7 @@
 #include <sys/file.h>
 #include <sys/types.h>
 #include <sys/time.h>
- 
-
+#include <sys/wait.h>
 
 /**
  * Instance
@@ -1192,7 +1191,9 @@ PHP_METHOD(Pacos_Instance, startJob) {
         close(n);
     }
 
-    chdir("/tmp");
+    if(chdir("/tmp") < 0) {
+        //do nothing
+    }
     flock(fd, LOCK_UN);
     close(fd);
 
@@ -1258,7 +1259,9 @@ PHP_METHOD(Pacos_Instance, startJob) {
     zephir_read_property(&_3$$5, this_ptr, ZEND_STRL("beat_run_mode"), PH_NOISY_CC | PH_READONLY);
     if (ZEPHIR_IS_LONG(&_3$$5, 1)) {
         sprintf(pidStr, "%d", cpid);
-        write(fd, pidStr, sizeof(pidStr));
+        if (write(fd, pidStr, sizeof(pidStr)) < 0) {
+            //do nothing
+        }
     }
 
     while (1) {
