@@ -13,7 +13,6 @@ PHP_METHOD(Pacos_Instance, select);
 PHP_METHOD(Pacos_Instance, call);
 PHP_METHOD(Pacos_Instance, cleanRegister);
 PHP_METHOD(Pacos_Instance, register);
-PHP_METHOD(Pacos_Instance, backend);
 PHP_METHOD(Pacos_Instance, startJob);
 PHP_METHOD(Pacos_Instance, sendBeat);
 PHP_METHOD(Pacos_Instance, stopJob);
@@ -165,7 +164,6 @@ ZEPHIR_INIT_FUNCS(pacos_instance_method_entry) {
 	PHP_ME(Pacos_Instance, call, arginfo_pacos_instance_call, ZEND_ACC_PUBLIC)
 	PHP_ME(Pacos_Instance, cleanRegister, arginfo_pacos_instance_cleanregister, ZEND_ACC_PUBLIC)
 	PHP_ME(Pacos_Instance, register, arginfo_pacos_instance_register, ZEND_ACC_PUBLIC)
-	PHP_ME(Pacos_Instance, backend, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Pacos_Instance, startJob, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Pacos_Instance, sendBeat, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Pacos_Instance, stopJob, NULL, ZEND_ACC_PUBLIC)
