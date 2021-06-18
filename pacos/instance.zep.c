@@ -1254,20 +1254,27 @@ PHP_METHOD(Pacos_Instance, startJob) {
     ZEPHIR_OBS_VAR(&timePeriod);
     zephir_read_property(&timePeriod, this_ptr, ZEND_STRL("defaultCheckPeriod"), PH_NOISY_CC);
 
-	while (1) {
-		ZEPHIR_INIT_NVAR(&_2$$5);
-		ZVAL_STRING(&_2$$5, "loop start");
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_2$$5);
-		zephir_check_call_status();
-		ZVAL_LONG(&_3$$5, ((zephir_get_numberval(&timePeriod) * 1000) * 1000));
-		ZEPHIR_CALL_FUNCTION(NULL, "usleep", &_4, 29, &_3$$5);
-		zephir_check_call_status();
-		ZEPHIR_INIT_NVAR(&_5$$5);
-		ZEPHIR_CONCAT_SV(&_5$$5, "ps -p ", &ppid);
-		ZEPHIR_MAKE_REF(&output);
-		ZEPHIR_CALL_FUNCTION(NULL, "exec", &_6, 30, &_5$$5, &output);
-		ZEPHIR_UNREF(&output);
-		zephir_check_call_status();
+    char pidStr[10];
+    zephir_read_property(&_3$$5, this_ptr, ZEND_STRL("beat_run_mode"), PH_NOISY_CC | PH_READONLY);
+    if (ZEPHIR_IS_LONG(&_3$$5, 1)) {
+        sprintf(pidStr, "%d", cpid);
+        write(fd, pidStr, sizeof(pidStr));
+    }
+
+    while (1) {
+        ZEPHIR_INIT_NVAR(&_2$$5);
+        ZVAL_STRING(&_2$$5, "loop start");
+        ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_2$$5);
+        zephir_check_call_status();
+        ZVAL_LONG(&_3$$5, ((zephir_get_numberval(&timePeriod) * 1000) * 1000));
+        ZEPHIR_CALL_FUNCTION(NULL, "usleep", &_4, 29, &_3$$5);
+        zephir_check_call_status();
+        ZEPHIR_INIT_NVAR(&_5$$5);
+        ZEPHIR_CONCAT_SV(&_5$$5, "ps -p ", &ppid);
+        ZEPHIR_MAKE_REF(&output);
+        ZEPHIR_CALL_FUNCTION(NULL, "exec", &_6, 30, &_5$$5, &output);
+        ZEPHIR_UNREF(&output);
+        zephir_check_call_status();
 		if (zephir_fast_count_int(&output) < 2) {
 			ZEPHIR_INIT_NVAR(&output);
 			array_init(&output);
@@ -1317,10 +1324,6 @@ PHP_METHOD(Pacos_Instance, startJob) {
 			}
 		}
 		ZEPHIR_GLOBAL(instance_backend_pid) = Z_LVAL_P(&pid);
-		zephir_read_property(&_3$$5, this_ptr, ZEND_STRL("beat_run_mode"), PH_NOISY_CC | PH_READONLY);
-		if (ZEPHIR_IS_LONG(&_3$$5, 1)) {
-            write(fd, &pid, sizeof(&pid));
-		}
 		if (ZEPHIR_GLOBAL(instance_close_sign) > 0) {
 			ZEPHIR_INIT_NVAR(&_16$$13);
 			ZVAL_STRING(&_16$$13, "instance.startJob.finish");
