@@ -1133,7 +1133,6 @@ PHP_METHOD(Pacos_Instance, startJob) {
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_0, &ppid);
 	zephir_check_call_status();
 
-    /**lock*/
     zephir_read_property(&pidFileName, this_ptr, ZEND_STRL("beat_pid_file"), PH_NOISY_CC | PH_READONLY);
     int fd =-1, ret =-1;
    
@@ -1185,11 +1184,7 @@ PHP_METHOD(Pacos_Instance, startJob) {
     ZEPHIR_CALL_FUNCTION(&pid, "posix_getpid", &_1, 28);
     zephir_check_call_status();
 
-    /**lock*/
     zephir_read_property(&pidFileName, this_ptr, ZEND_STRL("beat_pid_file"), PH_NOISY_CC | PH_READONLY);
-    /*int fd =-1, ret =-1;*/
-   
-    /*char *filePath;*/
     if (Z_TYPE_P(&pidFileName) != IS_STRING) {
         convert_to_string(&pidFileName);
     }
@@ -1201,20 +1196,7 @@ PHP_METHOD(Pacos_Instance, startJob) {
         return;
     }
 
-    ret = -1;
-    /*int tryNum = 10;*/
-    /*while(tryNum > 0) {*/
-        ret = flock(fd, LOCK_EX); 
-        /*if (ret >= 0) {
-            break;
-        }*/
-        /*tryNum--;*/
-
-        /*ZEPHIR_INIT_NVAR(&_14$$12);
-        ZVAL_STRING(&_14$$12, "instance.startJob.get_lock_in_while");
-        ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_14$$12, &pid);*/
-    /*}*/
-
+    ret = flock(fd, LOCK_EX); 
     ZEPHIR_INIT_NVAR(&_14$$12);
     ZVAL_STRING(&_14$$12, "instance.startJob.get_lock");
     ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_14$$12, &pid);
@@ -1243,11 +1225,9 @@ PHP_METHOD(Pacos_Instance, startJob) {
 		ZVAL_STRING(&_2$$5, "loop start");
 		ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_2$$5);
 		zephir_check_call_status();
-
 		ZVAL_LONG(&_3$$5, ((zephir_get_numberval(&timePeriod) * 1000) * 1000));
 		ZEPHIR_CALL_FUNCTION(NULL, "usleep", &_4, 29, &_3$$5);
 		zephir_check_call_status();
-
 		ZEPHIR_INIT_NVAR(&_5$$5);
 		ZEPHIR_CONCAT_SV(&_5$$5, "ps -p ", &ppid);
 		ZEPHIR_MAKE_REF(&output);
@@ -1267,7 +1247,6 @@ PHP_METHOD(Pacos_Instance, startJob) {
 		}
 		ZEPHIR_INIT_NVAR(&output);
 		array_init(&output);
-
 		ZEPHIR_INIT_NVAR(&_9$$5);
 		zephir_sub_function(&_9$$5, &timeLeft, &timePeriod);
 		ZEPHIR_CPY_WRT(&timeLeft, &_9$$5);
@@ -1303,24 +1282,10 @@ PHP_METHOD(Pacos_Instance, startJob) {
 				break;
 			}
 		}
-        ZEPHIR_INIT_NVAR(&_14$$12);
-        ZVAL_STRING(&_14$$12, "instance.startJob.one-beat-middle");
-        ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_14$$12, &pid);
-        zephir_check_call_status();
 		ZEPHIR_GLOBAL(instance_backend_pid) = Z_LVAL_P(&pid);
 		zephir_read_property(&_3$$5, this_ptr, ZEND_STRL("beat_run_mode"), PH_NOISY_CC | PH_READONLY);
 		if (ZEPHIR_IS_LONG(&_3$$5, 1)) {
-
-			/* try_start_2: */
-
-				zephir_read_property(&pidFileName, this_ptr, ZEND_STRL("beat_pid_file"), PH_NOISY_CC | PH_READONLY);
-				ZVAL_LONG(&_14$$12, 2);
-				ZEPHIR_CALL_FUNCTION(NULL, "file_put_contents", &_15, 8, &pidFileName, &pid, &_14$$12);
-				zephir_check_call_status_or_jump(try_end_2);
-
-			try_end_2:
-
-			zend_clear_exception(TSRMLS_C);
+            write(fd, &pid, sizeof(&pid));
 		}
 		if (ZEPHIR_GLOBAL(instance_close_sign) > 0) {
 			ZEPHIR_INIT_NVAR(&_16$$13);
@@ -1331,10 +1296,6 @@ PHP_METHOD(Pacos_Instance, startJob) {
 			zephir_check_call_status();
 			break;
 		}
-        ZEPHIR_INIT_NVAR(&_14$$12);
-        ZVAL_STRING(&_14$$12, "instance.startJob.one-beat");
-        ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_14$$12, &pid);
-        zephir_check_call_status();
 	}
 
     ZEPHIR_INIT_NVAR(&_14$$12);
