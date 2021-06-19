@@ -1255,15 +1255,6 @@ PHP_METHOD(Pacos_Instance, startJob) {
     ZEPHIR_OBS_VAR(&timePeriod);
     zephir_read_property(&timePeriod, this_ptr, ZEND_STRL("defaultCheckPeriod"), PH_NOISY_CC);
 
-    char pidStr[10];
-    zephir_read_property(&_3$$5, this_ptr, ZEND_STRL("beat_run_mode"), PH_NOISY_CC | PH_READONLY);
-    if (ZEPHIR_IS_LONG(&_3$$5, 1)) {
-        sprintf(pidStr, "%d", cpid);
-        if (write(fd, pidStr, sizeof(pidStr)) < 0) {
-            //do nothing
-        }
-    }
-
     while (1) {
         ZEPHIR_INIT_NVAR(&_2$$5);
         ZVAL_STRING(&_2$$5, "loop start");
@@ -1336,7 +1327,16 @@ PHP_METHOD(Pacos_Instance, startJob) {
 			zephir_check_call_status();
 			break;
 		}
-	}
+
+        char pidStr[10];
+        zephir_read_property(&_3$$5, this_ptr, ZEND_STRL("beat_run_mode"), PH_NOISY_CC | PH_READONLY);
+        if (ZEPHIR_IS_LONG(&_3$$5, 1)) {
+            sprintf(pidStr, "%d", cpid);
+            if (ftruncate(fd, 0) > -1 && write(fd, pidStr, sizeof(pidStr)) > -1) {
+                //do nothing
+            }
+        }
+    }
 
     ZEPHIR_INIT_NVAR(&_14$$12);
     ZVAL_STRING(&_14$$12, "instance.startJob.loop-end");
